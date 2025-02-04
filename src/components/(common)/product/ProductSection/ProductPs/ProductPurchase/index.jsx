@@ -1,5 +1,8 @@
+"use client";
+
 import { Heart, HeartOutline } from "@/assets/images/icons/Heart";
 import AddToCardButton from "@/components/partials/Buttons/AddToCardButton";
+import BayNowButton from "@/components/partials/Buttons/BayNowButton";
 import { Button } from "@/components/ui/Button";
 import {
   QuantityDecreaseTrigger,
@@ -31,14 +34,14 @@ const ProductPurchase = ({ className, product }) => {
         <QuantityIncreaseTrigger />
       </QuantitySelector>
 
-      {/* <BayNowButton className="flex-1 px-6" /> */}
+      <BayNowButton className="flex-1 px-6" />
       <AddToCardButton
         id={_id}
         quantity={quantity}
         disabled={getItemQuantityFromCart(_id) === quantity}
-        className="primary flex-1 px-6"
+        variant="outline"
+        className="primary hover:bg-accent hover:text-accent-foreground disabled:opacity-5"
       />
-      <AddToCardButton id={_id} className="primary" />
 
       <Button
         className="border-border text-foreground"

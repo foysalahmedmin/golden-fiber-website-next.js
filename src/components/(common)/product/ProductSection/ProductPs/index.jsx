@@ -51,17 +51,17 @@ const ProductPs = ({ className, product, isVariant }) => {
           </div>
           <div className="flex items-end gap-2">
             <strong className="text-xl font-semibold !leading-none text-title md:text-3xl">
-              $
               {toFixedAndLocaleStringCurrency({
                 value: price,
-              })}
+              })}{" "}
+              BDT
             </strong>
             {originalPrice && (
               <del className="!leading-none text-muted-foreground line-through md:text-lg">
-                $
                 {toFixedAndLocaleStringCurrency({
                   value: originalPrice,
-                })}
+                })}{" "}
+                BDT
               </del>
             )}
           </div>

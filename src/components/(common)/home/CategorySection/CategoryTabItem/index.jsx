@@ -44,7 +44,7 @@ const CategoryTabItem = async ({ value }) => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="absolute -top-6 right-0 inline-flex -translate-y-full items-center gap-2 md:-top-8">
+          <div className="absolute -top-6 right-0 hidden -translate-y-full items-center gap-2 md:-top-8 lg:inline-flex">
             <CarouselPreviousTrigger
               className="static bottom-0 top-0 inline-flex -translate-y-0 transition-all duration-300"
               shape="icon"

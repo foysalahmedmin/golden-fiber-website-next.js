@@ -25,7 +25,9 @@ const Navigation = ({ access, user }) => {
           <div className="flex items-center justify-end gap-4">
             <div className="flex items-center justify-end gap-2 lg:gap-4">
               <SearchBar className="hidden lg:flex" />
-              <ThemeToggler />
+              <div className="hidden lg:inline-flex">
+                <ThemeToggler />
+              </div>
               <Cart access={access} user={user} />
               <UserAndAuthNav access={access} user={user} />
             </div>

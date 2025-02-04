@@ -16,6 +16,7 @@ const useCart = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [cartProducts, setCartProducts] = useState([]);
+  console.log(cartProducts);
 
   const cart = useSelector((state) => state.cart);
 
@@ -49,7 +50,7 @@ const useCart = () => {
       try {
         setIsLoading(true);
         const products = await getCartProducts({ ids: [...cartIds] });
-        setCartProducts(products);
+        products?.length > 0 ? setCartProducts(products) : setCartProducts([]);
       } catch (error) {
         console.log(error);
       } finally {
