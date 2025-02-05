@@ -19,7 +19,7 @@ const HomePage = () => {
   return (
     <main>
       <div className="container relative flex md:gap-x-6 xl:gap-x-8">
-        <aside className="self-stretch py-4 md:w-60 md:py-6 xl:w-80 xl:py-8">
+        <aside className="hidden self-stretch py-4 md:w-60 md:py-6 lg:block xl:w-80 xl:py-8">
           <Categories className="h-full" />
         </aside>
         <div className="flex-1 self-stretch py-4 md:py-6 xl:py-8">
