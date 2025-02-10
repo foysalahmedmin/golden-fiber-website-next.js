@@ -116,17 +116,21 @@ const ProductOfferCard = ({ item, className }) => {
     short_description,
     rating,
     totalReviews,
-    originalPrice,
-    price,
-    quantity,
     number_of_sales,
     tags,
+    stocks,
   } = item;
+  const {
+    quantity: availableQuantity,
+    selling_price,
+    original_price,
+  } = stocks || {};
 
   const image = urls?.product_thumbnail + "/" + thumbnail;
 
-  const initialStock = parseInt(quantity || 0) + parseInt(number_of_sales || 0);
-  const availableStock = parseInt(quantity || 0);
+  const initialStock =
+    parseInt(availableQuantity || 0) + parseInt(number_of_sales || 0);
+  const availableStock = parseInt(availableQuantity || 0);
 
   const endDate = "2025-02-01";
 
@@ -139,7 +143,7 @@ const ProductOfferCard = ({ item, className }) => {
           </Link>
           {tags && tags?.length > 0 && <Tags tags={tags} />}
           <div
-            className={cn("absolute bottom-0 left-0 right-0 w-full py-[1em]", {
+            className={cn("absolute bottom-4 left-0 right-0 w-full py-[1em]", {
               "bottom-[5em]": !!endDate,
             })}
           >
@@ -183,8 +187,8 @@ const ProductOfferCard = ({ item, className }) => {
             <div className="flex items-center justify-between gap-[0.5em]">
               <div></div>
               <Price
-                price={price}
-                originalPrice={originalPrice}
+                price={selling_price}
+                originalPrice={original_price}
                 className="-right-[1em] ml-auto rounded-e-none"
               />
             </div>

@@ -1,5 +1,6 @@
 import {
   addItemToLocalCart,
+  clearLocalCart,
   getLocalCart,
   removeItemFromLocalCart,
 } from "@/utils/cartStorage";
@@ -34,7 +35,7 @@ export const cartSlice = createSlice({
       }
     },
 
-    clearCart: () => {
+    clearCart: (state) => {
       clearLocalCart();
       Object.keys(state).forEach((id) => delete state[id]);
     },

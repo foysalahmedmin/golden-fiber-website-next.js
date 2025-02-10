@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/Button";
 import useCart from "@/hooks/state/useCart";
 import { cn } from "@/lib/utils";
 import { addGuestOrder } from "@/network/orders/api";
-import { SetCartPaymentMethod } from "@/redux/slices/orderSlice";
+import { clearCart } from "@/redux/slices/cartSlice";
+import { SetCartPaymentMethod, SetResetCart } from "@/redux/slices/orderSlice";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -60,7 +61,7 @@ const PaymentSection = ({ className }) => {
         !name ||
         !email ||
         !address ||
-        !postal ||
+        // !postal ||
         !phone ||
         !payment_method ||
         cartProducts?.length === 0
@@ -72,31 +73,33 @@ const PaymentSection = ({ className }) => {
       const response = await addGuestOrder({
         name,
         city,
-        postal,
         phone,
         address,
         email,
-        sub_total: subtotal,
-        total: subtotal + (shipping?.charge || 0),
-        shipping: shipping?.charge,
-        sold_from: "customer",
+        sales_type: payment_method,
         payment_method,
-        items: cartProducts?.map((item) => {
+        gross_total: subtotal,
+        total: subtotal + (shipping?.charge || 0),
+        shipping_charge: shipping?.charge || 0,
+        orders: cartProducts?.map((item) => {
           return {
             product: item?._id,
-            selling_price: item?.price,
+            unit_price: Number(item?.stocks?.selling_price || 0),
             quantity: getItemQuantityFromCart({ id: item?._id }),
-            discount_amount: 0,
-            type: "product",
           };
         }),
       });
+      toast.success("Order Complete");
+
       if (payment_method === "offline") {
+        console.log("hello");
         dispatch(SetResetCart());
+        dispatch(clearCart());
         router.replace("/shop");
       } else {
         dispatch(SetResetCart());
-        window.location.replace(response);
+        dispatch(clearCart());
+        // window.location.replace(response);
       }
     } catch (error) {
       console.log(error);
@@ -180,11 +183,11 @@ const PaymentSection = ({ className }) => {
                       onChange={() => setShipping(item)}
                     />
                     <span className="font-medium leading-none group-has-[:checked]:text-title">
-                      {item.label}
+                      {item?.label}
                     </span>
                   </div>
                   <span className="absolute left-4 top-0 inline-block -translate-y-1/2 bg-card px-2 font-medium">
-                    {item.charge} BDT
+                    {item?.charge} BDT
                   </span>
                 </label>
               ))}
@@ -214,7 +217,7 @@ const PaymentSection = ({ className }) => {
                   <span className="inline-block font-medium uppercase text-title">
                     {getItemSubtotalFromCart({
                       id: item?._id,
-                      price: item?.price,
+                      price: item?.stocks?.selling_price,
                     })?.toFixed(2)}
                     BDT
                   </span>

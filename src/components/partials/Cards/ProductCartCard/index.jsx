@@ -20,7 +20,8 @@ const ProductCartCard = ({ className, item }) => {
     getItemQuantityFromCart,
     getItemSubtotalFromCart,
   } = useCart();
-  const { _id, name, price, thumbnail, availableStock } = item;
+  const { _id, name, thumbnail, stocks } = item;
+  const { quantity: availableQuantity, selling_price } = stocks || {};
 
   const image = urls?.product_thumbnail + "/" + thumbnail;
 
@@ -72,13 +73,13 @@ const ProductCartCard = ({ className, item }) => {
                 <strong className="text-[0.875em] text-foreground">
                   Price:
                 </strong>
-                <span className="text-[0.875em]">{price} BDT</span>
+                <span className="text-[0.875em]">{selling_price} BDT</span>
               </div>
               <div className="text-[0.75em]">
                 <QuantitySelector
                   quantity={getItemQuantityFromCart({ id: _id }) || 0}
                   setQuantity={handleSetQuantity}
-                  maxValue={availableStock}
+                  maxValue={availableQuantity}
                   minValue={0}
                   className="inline-flex"
                 >
@@ -108,7 +109,7 @@ const ProductCartCard = ({ className, item }) => {
             <span className="block font-bold">
               {getItemSubtotalFromCart({
                 id: _id,
-                price,
+                price: selling_price,
               })?.toFixed(2)}{" "}
               BDT
             </span>

@@ -115,10 +115,11 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
     short_description,
     rating,
     totalReviews,
-    originalPrice,
-    price,
+    stocks,
     tags,
   } = item;
+  const { selling_price, original_price } = stocks || {};
+
   const image = urls?.product_thumbnail + "/" + thumbnail;
   return (
     <>
@@ -157,8 +158,8 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
               <div className="flex items-center justify-between gap-[0.5em]">
                 <div></div>
                 <Price
-                  price={price}
-                  originalPrice={originalPrice}
+                  price={selling_price}
+                  originalPrice={original_price}
                   className="-right-[1em] ml-auto rounded-e-none"
                 />
               </div>
@@ -211,8 +212,8 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
               <div className="flex items-center justify-between gap-[0.5em]">
                 <div></div>
                 <Price
-                  price={price}
-                  originalPrice={originalPrice}
+                  price={selling_price}
+                  originalPrice={original_price}
                   className="-right-[1em] ml-auto rounded-e-none"
                 />
               </div>
@@ -276,8 +277,8 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
               <div className="flex flex-wrap items-center justify-between gap-[0.5em]">
                 <div></div>
                 <Price
-                  price={price}
-                  originalPrice={originalPrice}
+                  price={selling_price}
+                  originalPrice={original_price}
                   className="ml-auto"
                 />
               </div>

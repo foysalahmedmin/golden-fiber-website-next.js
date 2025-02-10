@@ -6,6 +6,7 @@ import { getProductDetails } from "@/network/products/api";
 const ProductPage = async ({ params }) => {
   const { id } = await params;
   const product = await getProductDetails(id);
+  console.log(product);
   return (
     <main>
       <ProductSection product={product} />

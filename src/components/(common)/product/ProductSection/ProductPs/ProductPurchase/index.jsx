@@ -2,7 +2,6 @@
 
 import { Heart, HeartOutline } from "@/assets/images/icons/Heart";
 import AddToCardButton from "@/components/partials/Buttons/AddToCardButton";
-import BayNowButton from "@/components/partials/Buttons/BayNowButton";
 import { Button } from "@/components/ui/Button";
 import {
   QuantityDecreaseTrigger,
@@ -15,8 +14,9 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 
 const ProductPurchase = ({ className, product }) => {
-  const { cart, getItemQuantityFromCart } = useCart();
-  const { _id, availableStock } = product;
+  const { getItemQuantityFromCart } = useCart();
+  const { _id, stocks } = product;
+  const { quantity: availableQuantity } = stocks || {};
   const wishListed = false;
   const [quantity, setQuantity] = useState(1);
 
@@ -26,21 +26,21 @@ const ProductPurchase = ({ className, product }) => {
         quantity={quantity}
         setQuantity={setQuantity}
         value={1}
-        minValue={1}
-        maxValue={Number(availableStock)}
+        minValue={0}
+        maxValue={Number(availableQuantity)}
       >
         <QuantityDecreaseTrigger />
         <QuantityInput />
         <QuantityIncreaseTrigger />
       </QuantitySelector>
 
-      <BayNowButton className="flex-1 px-6" />
+      {/* <BayNowButton className="flex-1 px-6" /> */}
       <AddToCardButton
         id={_id}
         quantity={quantity}
-        disabled={getItemQuantityFromCart(_id) === quantity}
+        disabled={getItemQuantityFromCart({ id: _id }) === quantity}
         variant="outline"
-        className="primary hover:bg-accent hover:text-accent-foreground disabled:opacity-5"
+        className="primary flex-1 hover:bg-accent hover:text-accent-foreground disabled:opacity-5"
       />
 
       <Button

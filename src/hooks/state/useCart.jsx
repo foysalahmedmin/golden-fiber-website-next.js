@@ -25,8 +25,8 @@ const useCart = () => {
     dispatch(removeItemFromCartSlice(payload));
   const clearCart = () => dispatch(clearCartSlice());
 
-  const getItemQuantityFromCart = ({ id }) => cart[id] || 0;
-  const getItemSubtotalFromCart = ({ id, price }) => {
+  const getItemQuantityFromCart = ({ id } = {}) => cart[id] || 0;
+  const getItemSubtotalFromCart = ({ id, price } = {}) => {
     return getValidNumber(
       parseFloat(price || 0) * parseFloat(getItemQuantityFromCart({ id }) || 0),
     );
@@ -34,11 +34,11 @@ const useCart = () => {
 
   const subtotal =
     cartProducts?.reduce(
-      (acc, product) =>
+      (acc, { _id, stocks }) =>
         acc +
         getItemSubtotalFromCart({
-          id: product?._id,
-          price: product?.price,
+          id: _id,
+          price: stocks?.selling_price,
         }),
       0,
     ) || 0;

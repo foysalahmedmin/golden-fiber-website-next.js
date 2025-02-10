@@ -1,34 +1,34 @@
+import { urls } from "@/lib/base";
+
 export const addGuestOrder = async ({
   name,
   city,
-  postal,
   phone,
   address,
   email,
-  sub_total,
-  total,
-  shipping,
-  sold_from,
+  sales_type,
   payment_method,
-  items,
+  gross_total,
+  total,
+  shipping_charge,
+  orders,
 }) => {
   const payload = {
     name,
     city,
-    postal,
     phone,
     address,
     email,
-    sub_total,
-    total,
-    shipping,
-    sold_from,
+    sales_type,
     payment_method,
-    items,
+    gross_total,
+    total,
+    shipping_charge,
+    orders,
   };
 
   try {
-    const response = await fetch(`${urls.url}/api/order/add_guest_order`, {
+    const response = await fetch(`${urls.url}/api/sales/add_sales`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),

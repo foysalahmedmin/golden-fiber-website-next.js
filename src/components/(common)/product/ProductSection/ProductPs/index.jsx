@@ -10,14 +10,15 @@ const ProductPs = ({ className, product, isVariant }) => {
     short_description,
     variants,
     sizes,
-    price,
     originalPrice,
     rating,
     totalReviews,
-    quantity,
+    stocks,
   } = product;
 
-  const inStock = quantity && parseInt(quantity) > 0;
+  const { quantity: availableQuantity, selling_price } = stocks || {};
+
+  const inStock = availableQuantity && parseInt(availableQuantity) > 0;
 
   return (
     <>
@@ -52,7 +53,7 @@ const ProductPs = ({ className, product, isVariant }) => {
           <div className="flex items-end gap-2">
             <strong className="text-xl font-semibold !leading-none text-title md:text-3xl">
               {toFixedAndLocaleStringCurrency({
-                value: price,
+                value: selling_price,
               })}{" "}
               BDT
             </strong>

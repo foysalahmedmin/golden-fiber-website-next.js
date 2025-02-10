@@ -25,7 +25,7 @@ const ProductSection = async () => {
           </Drawer>
 
           <div className="flex-1 space-y-6 py-6 md:space-y-8 md:py-8">
-            <div className="flex w-full items-center justify-between gap-6 bg-card py-4">
+            <div className="flex w-full items-center justify-between gap-6 rounded-md bg-card py-4">
               <div>
                 <Button
                   className="lg:hidden"
@@ -46,7 +46,7 @@ const ProductSection = async () => {
               </div>
               <div className="mt-6 flex items-center justify-between md:mt-8">
                 <div></div>
-                <Pagination pages={5} currentPage={2} />
+                <Pagination pages={1} currentPage={1} />
               </div>
             </div>
           </div>

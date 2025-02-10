@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 const ProductThumbnail = ({ className, product }) => {
-  const { name, thumbnail, gallery } = product;
+  const { name, thumbnail, gallery } = product?.media || {};
 
   const image = urls?.product_thumbnail + "/" + thumbnail;
   const othersImages = gallery?.map(
