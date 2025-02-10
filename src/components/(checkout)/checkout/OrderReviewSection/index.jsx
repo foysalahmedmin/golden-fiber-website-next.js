@@ -33,7 +33,7 @@ const OrderReviewSection = ({ className }) => {
               </span>
             </div>
           </div>
-          <div className="space-y-4">
+          {/* <div className="space-y-4">
             <span className="block font-medium text-title">
               Select delivery
             </span>
@@ -42,16 +42,12 @@ const OrderReviewSection = ({ className }) => {
                 <label className="flex cursor-pointer justify-between gap-2 p-4">
                   <div className="min-w-20">
                     <span className="font-medium uppercase text-title">
-                      {/* {shipping?.charge || 0} */}
                       BDT
                     </span>
                   </div>
                   <div className="flex-1 space-y-1 text-title">
                     <span className="block text-base">Regular</span>
-                    <span className="block text-sm">
-                      ({/* {shipping?.days || 0}  */}
-                      days delivery)
-                    </span>
+                    <span className="block text-sm">(3-5 days delivery)</span>
                   </div>
                   <div className="grid place-items-center">
                     <input
@@ -63,7 +59,7 @@ const OrderReviewSection = ({ className }) => {
                 </label>
               </li>
             </ul>
-          </div>
+          </div> */}
           <div className="space-y-4">
             <p>You're almost close to placing your order!</p>
             <progress className="w-full" value={75} max={100} />

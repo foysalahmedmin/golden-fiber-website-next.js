@@ -118,7 +118,11 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
     stocks,
     tags,
   } = item;
-  const { selling_price, original_price } = stocks || {};
+  const {
+    selling_price,
+    original_price,
+    quantity: availableQuantity,
+  } = stocks || {};
 
   const image = urls?.product_thumbnail + "/" + thumbnail;
   return (
@@ -168,6 +172,7 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
                   className="primary w-full rounded-md rounded-t-none text-[0.875em] uppercase hover:bg-primary/75 group-hover/card:bg-primary group-hover/card:text-primary-foreground"
                   variant="outline"
                   id={_id}
+                  availableQuantity={availableQuantity}
                 >
                   <span>Add to Cart</span>{" "}
                   <ShoppingCart className="size-[1.5em]" />
@@ -222,6 +227,7 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
                   className="primary w-full rounded-md rounded-t-none text-[0.875em] uppercase hover:bg-primary/75 group-hover/card:bg-primary group-hover/card:text-primary-foreground"
                   variant="outline"
                   id={_id}
+                  availableQuantity={availableQuantity}
                 >
                   <span>Add to Cart</span>{" "}
                   <ShoppingCart className="size-[1.5em]" />
@@ -287,6 +293,7 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
                   className="primary h-[2.5em] w-full rounded-md rounded-t-none text-[0.875em] uppercase hover:bg-primary/75 group-hover/card:bg-primary group-hover/card:text-primary-foreground"
                   variant="outline"
                   id={_id}
+                  availableQuantity={availableQuantity}
                 >
                   <span>Add to Cart</span>{" "}
                   <ShoppingCart className="size-[1em]" />

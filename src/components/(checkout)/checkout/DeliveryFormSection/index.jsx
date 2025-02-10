@@ -9,7 +9,6 @@ import {
   SetCartEmail,
   SetCartName,
   SetCartPhone,
-  SetCartPostal,
   ToggleAsProfile,
 } from "@/redux/slices/orderSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -92,7 +91,7 @@ const DeliveryFormSection = ({ className }) => {
                 />
               </label>
             </div>
-            <div>
+            {/* <div>
               <label>
                 <span className="mb-1 inline-block text-sm font-medium capitalize text-title">
                   Postcode/ZIP Code*
@@ -107,7 +106,7 @@ const DeliveryFormSection = ({ className }) => {
                   required
                 />
               </label>
-            </div>
+            </div> */}
             <div>
               <label>
                 <span className="mb-1 inline-block text-sm font-medium capitalize text-title">

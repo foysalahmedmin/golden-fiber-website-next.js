@@ -20,7 +20,9 @@ const CartItem = ({ className, item, index }) => {
     getItemQuantityFromCart,
     getItemSubtotalFromCart,
   } = useCart();
-  const { _id, name, price, thumbnail, availableStock } = item;
+  const { _id, name, short_description, stocks, thumbnail } = item;
+
+  const { quantity: availableQuantity, selling_price } = stocks || {};
 
   const image = urls?.product_thumbnail + "/" + thumbnail;
 
@@ -49,6 +51,7 @@ const CartItem = ({ className, item, index }) => {
           </div>
           <div className="flex-1">
             <h5 className="text-[1.15em] leading-tight">{name}</h5>
+            <small className="text-[0.875em]">{short_description}</small>
             {/* <div className="leading-[1.25em]">
               <div className="flex items-center gap-[0.25em] text-muted-foreground">
                 <strong className="text-[0.875em] text-foreground">
@@ -68,13 +71,13 @@ const CartItem = ({ className, item, index }) => {
         </div>
       </td>
       <td className="whitespace-nowrap px-[1em] py-[0.5em] text-center text-[1em]">
-        ${price}
+        {selling_price} BDT
       </td>
       <td className="whitespace-nowrap px-[1em] py-[0.5em] text-center text-[1em]">
         <QuantitySelector
           quantity={getItemQuantityFromCart({ id: _id }) || 0}
           setQuantity={handleSetQuantity}
-          maxValue={availableStock}
+          maxValue={availableQuantity}
           minValue={0}
           className="inline-flex"
         >
@@ -86,7 +89,7 @@ const CartItem = ({ className, item, index }) => {
       <td className="whitespace-nowrap py-[0.5em] text-center text-[1em] font-semibold">
         {getItemSubtotalFromCart({
           id: _id,
-          price,
+          price: selling_price,
         })?.toFixed(2)}{" "}
         BDT
       </td>

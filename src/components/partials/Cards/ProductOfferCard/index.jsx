@@ -132,7 +132,8 @@ const ProductOfferCard = ({ item, className }) => {
     parseInt(availableQuantity || 0) + parseInt(number_of_sales || 0);
   const availableStock = parseInt(availableQuantity || 0);
 
-  const endDate = "2025-02-01";
+  const endDate = "";
+  // const endDate = "2025-02-01";
 
   return (
     <div className={cn("group/card h-full text-[1rem]", className)}>
@@ -143,9 +144,12 @@ const ProductOfferCard = ({ item, className }) => {
           </Link>
           {tags && tags?.length > 0 && <Tags tags={tags} />}
           <div
-            className={cn("absolute bottom-4 left-0 right-0 w-full py-[1em]", {
-              "bottom-[5em]": !!endDate,
-            })}
+            className={cn(
+              "absolute bottom-[3em] left-0 right-0 w-full py-[1em]",
+              {
+                "bottom-[5em]": !!endDate,
+              },
+            )}
           >
             <CartInfo />
           </div>
@@ -197,6 +201,7 @@ const ProductOfferCard = ({ item, className }) => {
                 className="primary w-full rounded-md rounded-t-none text-[0.875em] uppercase hover:bg-primary/75 group-hover/card:bg-primary group-hover/card:text-primary-foreground"
                 variant="outline"
                 id={_id}
+                availableQuantity={availableQuantity}
               >
                 <span>Add to Cart</span>{" "}
                 <ShoppingCart className="size-[1.5em]" />

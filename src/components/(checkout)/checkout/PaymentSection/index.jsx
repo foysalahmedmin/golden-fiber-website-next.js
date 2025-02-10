@@ -129,16 +129,16 @@ const PaymentSection = ({ className }) => {
                   Cash on delivery
                 </span>
               </div>
-              <img
+              {/* <img
                 className="h-8 object-contain object-right"
                 src="/images/payment-methods/bkash.png"
                 alt="bkash-logo"
-              />
+              /> */}
               <span className="absolute left-4 top-0 inline-block -translate-y-1/2 bg-card px-2 font-medium">
                 Express checkout
               </span>
             </label>
-            <label className="group relative flex cursor-pointer items-center justify-between rounded-md border px-4 py-3 has-[:checked]:border-current">
+            {/* <label className="group relative flex cursor-pointer items-center justify-between rounded-md border px-4 py-3 has-[:checked]:border-current">
               <div className="inline-flex items-center gap-2">
                 <input
                   className="radio shrink-0 text-xl leading-none"
@@ -157,7 +157,7 @@ const PaymentSection = ({ className }) => {
                 src="/images/payment-methods/ssl.png"
                 alt="ssl-commerce-logo"
               />
-            </label>
+            </label> */}
           </form>
         </div>
       </div>
