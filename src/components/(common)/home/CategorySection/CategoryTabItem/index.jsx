@@ -9,12 +9,12 @@ import {
 import { TabsItem } from "@/components/ui/Tabs";
 import { urls } from "@/lib/base";
 import { cn } from "@/lib/utils";
-import { getAllCategories } from "@/network/categories/api";
+import { getAllSubCategories } from "@/network/categories/api";
 import Image from "next/image";
 
 const CategoryTabItem = async ({ value }) => {
-  const { data: categories } = await getAllCategories({
-    parent_category: value,
+  const { data: subCategories } = await getAllSubCategories({
+    category: value,
   });
   return (
     <TabsItem value={value} className={cn("w-full")}>
@@ -25,7 +25,7 @@ const CategoryTabItem = async ({ value }) => {
           autoplay
         >
           <CarouselContent>
-            {categories?.map((item, i) => (
+            {subCategories?.map((item, i) => (
               <CarouselItem
                 key={i}
                 className="basis-1/4 p-2 md:basis-1/6 xl:basis-[12.5%] 2xl:basis-[10%]"

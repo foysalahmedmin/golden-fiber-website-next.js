@@ -11,7 +11,7 @@ import { SectionTitle, Subtitle, Title } from "@/components/ui/SectionTitle";
 import { getAllProducts } from "@/network/products/api";
 
 const FlashSalesProductSection = async () => {
-  const { data: products } = await getAllProducts({ today_deal: true });
+  const { data: products } = await getAllProducts({ is_today_deal: true });
   return (
     <section className="py-12 md:py-16">
       <div className="container">

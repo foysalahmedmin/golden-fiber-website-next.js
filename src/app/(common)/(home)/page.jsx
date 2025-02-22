@@ -1,5 +1,4 @@
 import BannerSection from "@/components/(common)/home/BannerSection";
-import CategorySection from "@/components/(common)/home/CategorySection";
 import FeatureSection from "@/components/(common)/home/FeatureSection";
 import InstagramSection from "@/components/(common)/home/InstagramSection";
 import SpacialOfferSection from "@/components/(common)/home/SpacialOfferSection";
@@ -37,10 +36,7 @@ const HomePage = () => {
       <div className="container">
         <hr />
       </div>
-      <CategorySection />
-      <div className="container">
-        <hr />
-      </div>
+      {/* <CategorySection /> */}
       <TrendingProductSection />
       <SpacialOfferSection />
       <TestimonialSection />

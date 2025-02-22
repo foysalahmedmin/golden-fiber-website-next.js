@@ -4,11 +4,14 @@ export const getAllProducts = async ({
   page,
   limit,
   search,
-  parent_category,
   category,
   sub_category,
-  today_deal,
-  featured,
+  price_min,
+  price_max,
+  date_from,
+  date_to,
+  is_today_deal,
+  is_featured,
   sort,
 } = {}) => {
   const endpoint = `${urls.url}/api/product/physical/get_products`;
@@ -19,11 +22,14 @@ export const getAllProducts = async ({
   if (page) params.append("page", page);
   if (limit) params.append("limit", limit);
   if (search) params.append("search", search);
-  if (parent_category) params.append("parent_category", parent_category);
   if (category) params.append("category", category);
   if (sub_category) params.append("sub_category", sub_category);
-  if (today_deal) params.append("today_deal", true);
-  if (featured) params.append("today_deal", true);
+  if (price_min) params.append("price_min", price_min);
+  if (price_max) params.append("price_max", price_max);
+  if (date_from) params.append("date_from", date_from);
+  if (date_to) params.append("date_to", date_to);
+  if (is_today_deal) params.append("is_today_deal", true);
+  if (is_featured) params.append("is_today_deal", true);
   if (sort) params.append("sort", sort);
 
   const urlWithQuery = `${endpoint}?${params.toString()}`;

@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import { getAllProducts } from "@/network/products/api";
 
 const TrendingProductTabItem = async ({ value }) => {
-  const { data } = await getAllProducts({ parent_category: value });
+  const { data: products } = await getAllProducts({ category: value });
   return (
     <TabsItem value={value} className={cn("w-full")}>
       <div className="pb-6">
@@ -22,7 +22,7 @@ const TrendingProductTabItem = async ({ value }) => {
           autoplay
         >
           <CarouselContent>
-            {data?.map((item, index) => (
+            {products?.map((item, index) => (
               <CarouselItem
                 key={index}
                 className="p-2 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"

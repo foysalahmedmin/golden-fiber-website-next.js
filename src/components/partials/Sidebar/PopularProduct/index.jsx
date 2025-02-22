@@ -11,7 +11,7 @@ import { partitionArrayIntoChunks } from "@/utils/partitionArrayIntoChunks";
 import ProductCard from "../../Cards/ProductCard";
 
 const PopularProduct = async ({ className }) => {
-  const { data: products } = await getAllProducts({ sort: "sales_desc" });
+  const { data: products } = await getAllProducts({ sort: "-sales" });
   return (
     <div
       className={cn("overflow-y-auto rounded-md border py-6 pb-2", className)}
