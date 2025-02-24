@@ -122,7 +122,7 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
     selling_price,
     original_price,
     quantity: availableQuantity,
-  } = stocks || {};
+  } = stocks?.[0] || {};
 
   const image = urls?.product_thumbnail + "/" + thumbnail;
   return (

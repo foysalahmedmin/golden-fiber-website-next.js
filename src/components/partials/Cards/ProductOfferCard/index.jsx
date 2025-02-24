@@ -124,7 +124,7 @@ const ProductOfferCard = ({ item, className }) => {
     quantity: availableQuantity,
     selling_price,
     original_price,
-  } = stocks || {};
+  } = stocks?.[0] || {};
 
   const image = urls?.product_thumbnail + "/" + thumbnail;
 

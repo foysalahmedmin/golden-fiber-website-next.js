@@ -1,22 +1,34 @@
 import { StarRating } from "@/components/ui/StarRating";
 import { cn, toFixedAndLocaleStringCurrency } from "@/lib/utils";
+import ColorsList from "./ColorsList";
 import ProductPurchase from "./ProductPurchase";
-import ProductSizeList from "./ProductSizeList";
-import ProductVariantList from "./ProductVariantList";
 
-const ProductPs = ({ className, product, isVariant }) => {
+const ProductPs = ({ className, product, stock, isVariant }) => {
   const {
     name,
     short_description,
-    variants,
-    sizes,
     originalPrice,
     rating,
     totalReviews,
     stocks,
   } = product;
 
-  const { quantity: availableQuantity, selling_price } = stocks || {};
+  const { quantity: availableQuantity, selling_price, color } = stock || {};
+
+  const getColors = (stocks = []) => {
+    const uniqueColors = new Map();
+
+    stocks.forEach((stock) => {
+      const color = stock?.color;
+      if (color?._id && !uniqueColors.has(color._id)) {
+        uniqueColors.set(color._id, color);
+      }
+    });
+
+    return [...uniqueColors.values()];
+  };
+
+  const colors = getColors(stocks);
 
   const inStock = availableQuantity && parseInt(availableQuantity) > 0;
 
@@ -71,9 +83,8 @@ const ProductPs = ({ className, product, isVariant }) => {
           <p>{short_description}</p>
         </div>
         <hr />
-        {isVariant && <ProductVariantList variants={variants} />}
-        {sizes && <ProductSizeList sizes={sizes} />}
-        {(isVariant || sizes) && <hr />}
+        {colors?.length > 0 && <ColorsList color={color} colors={colors} />}
+        {isVariant && <hr />}
         <ProductPurchase product={product} />
       </div>
     </>
