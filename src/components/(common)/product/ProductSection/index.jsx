@@ -1,10 +1,27 @@
 "use client";
 
-import { Tabs, TabsContent } from "@/components/ui/Tabs";
+import { Tabs, TabsContent, TabsItem } from "@/components/ui/Tabs";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import ProductPs from "./ProductPs";
 import ProductThumbnail from "./ProductThumbnail";
+
+const ProductContent = ({ product, stocks, isVariant }) => (
+  <TabsContent>
+    {stocks?.map((stock, index) => (
+      <TabsItem value={stock?._id} key={index}>
+        <div className="flex flex-col items-center gap-y-6 md:gap-x-8 lg:flex-row xl:gap-x-12">
+          <ProductThumbnail
+            product={product}
+            stock={stock}
+            isVariant={isVariant}
+          />
+          <ProductPs product={product} stock={stock} isVariant={isVariant} />
+        </div>
+      </TabsItem>
+    ))}
+  </TabsContent>
+);
 
 const ProductSection = ({ product }) => {
   const { stocks = [] } = product || {};
@@ -13,28 +30,22 @@ const ProductSection = ({ product }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const selectedColor = decodeURIComponent(searchParams.get("color") || "");
+  const selectedStockId = searchParams.get("stock");
 
   const [tab, setTab] = useState(stocks[0]?._id || "");
 
-  // Handle color selection from URL
   useEffect(() => {
-    if (selectedColor) {
-      const selectedStock = stocks?.find(
-        (stock) => stock?.color?.code === selectedColor,
-      );
-      if (selectedStock) {
-        setTab(selectedStock?._id);
-      }
-    } else if (stocks[0]?.color?.code) {
+    if (selectedStockId) {
+      setTab(selectedStockId);
+    } else if (stocks[0]?._id) {
       const params = new URLSearchParams(searchParams.toString());
-      params.set("color", encodeURIComponent(stocks[0]?.color?.code));
+      params.set("stock", stocks[0]?._id);
       router.replace(`${pathname}?${params.toString()}`, {
         scroll: false,
         replace: true,
       });
     }
-  }, [selectedColor, product, stocks, router, pathname, searchParams]);
+  }, [selectedStockId, stocks, router, pathname, searchParams]);
 
   return (
     <section className="py-12 md:py-16">
@@ -60,22 +71,5 @@ const ProductSection = ({ product }) => {
     </section>
   );
 };
-
-// Extracted reusable content for better readability
-const ProductContent = ({ product, stocks, isVariant }) => (
-  <div className="flex flex-col items-center gap-y-6 md:gap-x-8 lg:flex-row xl:gap-x-12">
-    <ProductThumbnail product={product} isVariant={isVariant} />
-    <TabsContent className="flex-1">
-      {stocks?.map((stock) => (
-        <ProductPs
-          key={stock._id}
-          product={product}
-          stock={stock}
-          isVariant={isVariant}
-        />
-      ))}
-    </TabsContent>
-  </div>
-);
 
 export default ProductSection;

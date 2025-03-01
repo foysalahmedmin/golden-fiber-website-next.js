@@ -13,10 +13,10 @@ import useCart from "@/hooks/state/useCart";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
-const ProductPurchase = ({ className, product }) => {
+const ProductPurchase = ({ className, product, stock }) => {
   const { getItemQuantityFromCart } = useCart();
-  const { _id, stocks } = product;
-  const { quantity: availableQuantity } = stocks || {};
+  const { _id } = product;
+  const { quantity: availableQuantity } = stock || {};
   const wishListed = false;
   const [quantity, setQuantity] = useState(1);
 
@@ -26,8 +26,8 @@ const ProductPurchase = ({ className, product }) => {
         quantity={quantity}
         setQuantity={setQuantity}
         value={1}
-        minValue={0}
-        maxValue={Number(availableQuantity)}
+        minValue={1}
+        maxValue={Number(availableQuantity) || 1}
       >
         <QuantityDecreaseTrigger />
         <QuantityInput />
@@ -37,6 +37,7 @@ const ProductPurchase = ({ className, product }) => {
       {/* <BayNowButton className="flex-1 px-6" /> */}
       <AddToCardButton
         id={_id}
+        stockId={stock?._id}
         quantity={quantity}
         disabled={getItemQuantityFromCart({ id: _id }) === quantity}
         variant="outline"
