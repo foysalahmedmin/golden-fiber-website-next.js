@@ -20,17 +20,22 @@ const ProductCartCard = ({ className, item }) => {
     getItemQuantityFromCart,
     getItemSubtotalFromCart,
   } = useCart();
-  const { _id, name, thumbnail, stocks } = item;
-  const { quantity: availableQuantity, selling_price } = stocks || {};
+  const { name, thumbnail, stock } = item;
+  const {
+    _id: stockId,
+    quantity: availableQuantity,
+    selling_price,
+    color,
+  } = stock || {};
 
   const image = urls?.product_thumbnail + "/" + thumbnail;
 
   const handleRemove = () => {
-    removeItemFromCart({ id: _id });
+    removeItemFromCart({ id: stockId });
   };
 
   const handleSetQuantity = (quantity) => {
-    addItemToCart({ id: _id, quantity });
+    addItemToCart({ id: stockId, quantity });
   };
 
   return (
@@ -53,21 +58,24 @@ const ProductCartCard = ({ className, item }) => {
           </div>
           <div className="flex-1">
             <h5 className="text-[1.15em] leading-[1.5em]">{name}</h5>
-            {/* <div className="leading-[1.25em]">
+            <div className="leading-[1.25em]">
               <div className="flex items-center gap-[0.25em] text-muted-foreground">
                 <strong className="text-[0.875em] text-foreground">
                   Color:
                 </strong>
-                <span className="size-[1em] rounded-full bg-orange-500" />
-                <span className="text-[0.875em]">Orange</span>
+                <span
+                  style={{ backgroundColor: color?.code }}
+                  className="size-[1em] rounded-full"
+                />
+                <span className="text-[0.875em]">{color?.name}</span>
               </div>
-              <div className="flex items-center gap-[0.25em] text-muted-foreground">
+              {/* <div className="flex items-center gap-[0.25em] text-muted-foreground">
                 <strong className="text-[0.875em] text-foreground">
                   Size:
                 </strong>
                 <span className="text-[0.875em]">XXL</span>
-              </div>
-            </div> */}
+              </div> */}
+            </div>
             <div>
               <div className="flex items-center gap-[0.25em] text-muted-foreground">
                 <strong className="text-[0.875em] text-foreground">
@@ -77,7 +85,7 @@ const ProductCartCard = ({ className, item }) => {
               </div>
               <div className="text-[0.75em]">
                 <QuantitySelector
-                  quantity={getItemQuantityFromCart({ id: _id }) || 0}
+                  quantity={getItemQuantityFromCart({ id: stockId }) || 0}
                   setQuantity={handleSetQuantity}
                   maxValue={availableQuantity}
                   minValue={0}
@@ -96,7 +104,7 @@ const ProductCartCard = ({ className, item }) => {
         <div className="flex h-full flex-col items-end justify-between">
           <div>
             <Button
-              onClick={() => handleRemove(_id)}
+              onClick={() => handleRemove()}
               className="h-[2em] shrink-0 rounded-full text-[0.75em] [--accent:var(--destructive)]"
               variant="outline"
               shape="icon"
@@ -108,7 +116,7 @@ const ProductCartCard = ({ className, item }) => {
           <div>
             <span className="block font-bold">
               {getItemSubtotalFromCart({
-                id: _id,
+                id: stockId,
                 price: selling_price,
               })?.toFixed(2)}{" "}
               BDT

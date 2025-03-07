@@ -16,7 +16,6 @@ const useCart = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [cartProducts, setCartProducts] = useState([]);
-  console.log(cartProducts);
 
   const cart = useSelector((state) => state.cart);
 
@@ -34,11 +33,11 @@ const useCart = () => {
 
   const subtotal =
     cartProducts?.reduce(
-      (acc, { _id, stocks }) =>
+      (acc, { stock }) =>
         acc +
         getItemSubtotalFromCart({
-          id: _id,
-          price: stocks?.selling_price,
+          id: stock?._id,
+          price: stock?.selling_price,
         }),
       0,
     ) || 0;

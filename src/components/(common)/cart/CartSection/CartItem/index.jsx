@@ -22,16 +22,21 @@ const CartItem = ({ className, item, index }) => {
   } = useCart();
   const { _id, name, short_description, stocks, thumbnail } = item;
 
-  const { quantity: availableQuantity, selling_price } = stocks || {};
+  const {
+    _id: stockId,
+    quantity: availableQuantity,
+    selling_price,
+    color,
+  } = stocks || {};
 
   const image = urls?.product_thumbnail + "/" + thumbnail;
 
   const handleRemove = () => {
-    removeItemFromCart({ id: _id });
+    removeItemFromCart({ id: stockId });
   };
 
   const handleSetQuantity = (quantity) => {
-    addItemToCart({ id: _id, quantity });
+    addItemToCart({ id: stockId, quantity });
   };
   return (
     <tr className={cn("border-b", className)}>
@@ -52,21 +57,24 @@ const CartItem = ({ className, item, index }) => {
           <div className="flex-1">
             <h5 className="text-[1.15em] leading-tight">{name}</h5>
             <small className="text-[0.875em]">{short_description}</small>
-            {/* <div className="leading-[1.25em]">
+            <div className="leading-[1.25em]">
               <div className="flex items-center gap-[0.25em] text-muted-foreground">
                 <strong className="text-[0.875em] text-foreground">
                   Color:
                 </strong>
-                <span className="size-[1em] rounded-full bg-orange-500" />
-                <span className="text-[0.875em]">Orange</span>
+                <span
+                  style={{ backgroundColor: color?.code }}
+                  className="size-[1em] rounded-full"
+                />
+                <span className="text-[0.875em]">{color?.name}</span>
               </div>
-              <div className="flex items-center gap-[0.25em] text-muted-foreground">
+              {/* <div className="flex items-center gap-[0.25em] text-muted-foreground">
                 <strong className="text-[0.875em] text-foreground">
                   Size:
                 </strong>
                 <span className="text-[0.875em]">XXL</span>
-              </div>
-            </div> */}
+              </div> */}
+            </div>
           </div>
         </div>
       </td>
@@ -75,7 +83,7 @@ const CartItem = ({ className, item, index }) => {
       </td>
       <td className="whitespace-nowrap px-[1em] py-[0.5em] text-center text-[1em]">
         <QuantitySelector
-          quantity={getItemQuantityFromCart({ id: _id }) || 0}
+          quantity={getItemQuantityFromCart({ id: stockId }) || 0}
           setQuantity={handleSetQuantity}
           maxValue={availableQuantity}
           minValue={0}
@@ -88,7 +96,7 @@ const CartItem = ({ className, item, index }) => {
       </td>
       <td className="whitespace-nowrap py-[0.5em] text-center text-[1em] font-semibold">
         {getItemSubtotalFromCart({
-          id: _id,
+          id: stockId,
           price: selling_price,
         })?.toFixed(2)}{" "}
         BDT

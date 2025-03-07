@@ -18,13 +18,13 @@ const SHIPPING_LIST = [
     id: 1,
     label: "Dhaka",
     value: "dhaka",
-    charge: 60,
+    charge: 70,
   },
   {
     id: 2,
     label: "Out Of Dhaka",
     value: "out-of-dhaka",
-    charge: 100,
+    charge: 110,
   },
 ];
 
@@ -50,7 +50,6 @@ const PaymentSection = ({ className }) => {
     useSelector((state) => state.order);
 
   const handleGuestOrder = async () => {
-    console.log("handleGuestOrder");
     try {
       setIsLoading(true);
       if (!isAgree) {
@@ -84,7 +83,9 @@ const PaymentSection = ({ className }) => {
         orders: cartProducts?.map((item) => {
           return {
             product: item?._id,
-            unit_price: Number(item?.stocks?.selling_price || 0),
+            stock: item?.stock?._id,
+            color: item?.stock?.color?._id,
+            unit_price: Number(item?.stock?.selling_price || 0),
             quantity: getItemQuantityFromCart({ id: item?._id }),
           };
         }),
@@ -92,7 +93,6 @@ const PaymentSection = ({ className }) => {
       toast.success("Order Complete");
 
       if (payment_method === "offline") {
-        console.log("hello");
         dispatch(SetResetCart());
         dispatch(clearCart());
         router.replace("/shop");

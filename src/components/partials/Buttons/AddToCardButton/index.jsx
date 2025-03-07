@@ -23,9 +23,7 @@ const AddToCardButton = forwardRef(
     return (
       <Button
         disabled={!availableQuantity || availableQuantity < 1 || disabled}
-        onClick={() =>
-          addItemToCart({ id: id + "_" + stockId, quantity: quantity })
-        }
+        onClick={() => addItemToCart({ id: stockId, quantity: quantity })}
         className={cn("", className)}
         {...props}
         ref={ref}
