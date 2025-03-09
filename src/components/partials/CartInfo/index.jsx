@@ -1,11 +1,19 @@
+"use client";
+
 import { Heart, HeartOutline } from "@/assets/images/icons/Heart";
 import { Magnify } from "@/assets/images/icons/Magnify";
 import { Share } from "@/assets/images/icons/Share";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 const CartInfo = ({ className }) => {
-  const wishListed = false;
+  const [isWishListed, setIsWishListed] = useState(false);
+
+  const handleWishList = (e) => {
+    e.stopPropagation();
+    setIsWishListed(!isWishListed);
+  };
   return (
     <div
       className={cn(
@@ -18,8 +26,9 @@ const CartInfo = ({ className }) => {
           className="h-[2.5em] bg-card text-[0.75em] text-title shadow hover:bg-primary hover:text-primary-foreground hover:shadow-primary"
           title="Wish List"
           shape="icon"
+          onClick={(e) => handleWishList(e)}
         >
-          {wishListed ? (
+          {isWishListed ? (
             <Heart className="size-[1.5em] text-primary-foreground" />
           ) : (
             <HeartOutline className="size-[1.5em]" />

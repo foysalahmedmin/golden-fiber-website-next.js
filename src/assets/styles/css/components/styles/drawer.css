@@ -1,26 +1,12 @@
 .drawer {
-  position: fixed;
-  transform: scale(0);
-  visibility: hidden;
-  opacity: 0;
-  transition-delay: 300ms;
-  inset: 0;
-  overflow: hidden;
-
   &.open,
   &[open] {
-    transform: scale(1);
-    visibility: visible;
-    opacity: 1;
-    transition-delay: 0s;
-
     & > .drawer-backdrop {
       transform: scale(1);
       visibility: visible;
       opacity: 1;
       transition-delay: 0s;
     }
-
     & > .drawer-content {
       transform: scaleX(1);
       visibility: visible;
@@ -31,7 +17,7 @@
 }
 
 .drawer-backdrop {
-  position: absolute;
+  position: fixed;
   transform: scale(0);
   visibility: hidden;
   opacity: 0;
@@ -47,7 +33,7 @@
 }
 
 .drawer-content {
-  position: absolute;
+  position: fixed;
   transform: scaleX(0);
   visibility: hidden;
   opacity: 0;
@@ -60,15 +46,7 @@
 
 /* Drawer utilities */
 .drawer-open {
-  position: static;
-  transform: scaleX(1);
-  visibility: visible;
-  opacity: 1;
-  transition-delay: 0s;
-  overflow: hidden;
-
   & > .drawer-backdrop {
-    all: unset;
     display: none;
     transform: scaleX(0);
     visibility: hidden;

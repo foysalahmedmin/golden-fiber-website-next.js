@@ -32,6 +32,8 @@ const RangeSlider = forwardRef(
       className,
       minValue: minValueProp = 2500,
       maxValue: maxValueProp = 7500,
+      setMinValue: setMinValueProp,
+      setMaxValue: setMaxValueProp,
       minGap = 500,
       minLimit = 0,
       maxLimit = 10000,
@@ -50,27 +52,37 @@ const RangeSlider = forwardRef(
 
     const onMinChange = useCallback(
       (value) => {
-        if (maxValue - value >= minGap) setMinValue(value);
+        if (maxValue - value >= minGap) {
+          setMinValue(value);
+          if (setMinValueProp) {
+            setMinValueProp(value);
+          }
+        }
       },
       [maxValue, minGap],
     );
 
     const onMaxChange = useCallback(
       (value) => {
-        if (value - minValue >= minGap) setMaxValue(value);
+        if (value - minValue >= minGap) {
+          setMaxValue(value);
+          if (setMaxValueProp) {
+            setMaxValueProp(value);
+          }
+        }
       },
       [minValue, minGap],
     );
 
     useEffect(() => {
-      if (minValueProp !== undefined) {
-        onMinChange(minValueProp);
+      if (minValueProp !== undefined && maxValue - minValueProp >= minGap) {
+        setMinValue(minValueProp);
       }
     }, [minValueProp, onMinChange]);
 
     useEffect(() => {
-      if (maxValueProp !== undefined) {
-        onMaxChange(maxValueProp);
+      if (maxValueProp !== undefined && maxValueProp - minValue >= minGap) {
+        setMaxValue(maxValueProp);
       }
     }, [maxValueProp, onMaxChange]);
 

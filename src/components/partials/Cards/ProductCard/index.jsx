@@ -1,4 +1,6 @@
+import { Button } from "@/components/ui/Button";
 import { StarRating } from "@/components/ui/StarRating";
+import { Tabs, TabsContent, TabsItem, TabsTrigger } from "@/components/ui/Tabs";
 import { urls } from "@/lib/base";
 import { cn, toFixedAndLocaleStringCurrency } from "@/lib/utils";
 import { ShoppingCart } from "lucide-react";
@@ -107,9 +109,40 @@ const RatingReviews = ({ rating, totalReviews, className }) => {
   );
 };
 
-const ProductCard = ({ item, className, variant = "grid" }) => {
+const StocksColorTabTriggers = ({ stocks, className }) => {
+  return (
+    <div
+      className={cn(
+        "flex flex-wrap justify-start gap-[0.5em] overflow-visible overflow-x-visible overflow-y-visible px-[0.25em]",
+        className,
+      )}
+    >
+      {stocks?.map((stock, i) => {
+        return (
+          <TabsTrigger
+            key={i}
+            value={stock?._id}
+            className="flex size-[1.25em] overflow-hidden rounded-full border-0 after:hidden"
+            activeClassName="ring-[0.1em] ring-muted-foreground/50 ring-offset-[0.1em]"
+          >
+            <Button
+              style={{ background: stock?.color?.code }}
+              className="size-full rounded-full"
+              variant="none"
+              shape="icon"
+              size="sm"
+              asChild={true}
+            />
+          </TabsTrigger>
+        );
+      })}
+    </div>
+  );
+};
+
+const ProductCardTab = ({ product, stock, className, variant = "grid" }) => {
   const {
-    _id,
+    _id: productId,
     name,
     thumbnail,
     short_description,
@@ -117,16 +150,18 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
     totalReviews,
     stocks,
     tags,
-  } = item;
+  } = product;
   const {
+    _id: stockId,
     selling_price,
     original_price,
     quantity: availableQuantity,
-  } = stocks?.[0] || {};
+  } = stock || {};
 
   const image = urls?.product_thumbnail + "/" + thumbnail;
+
   return (
-    <>
+    <TabsItem value={stockId}>
       {variant === "grid" && (
         <div
           className={cn(
@@ -136,7 +171,10 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
         >
           <div className="flex size-full flex-col">
             <div className="relative w-full">
-              <Link href={_id ? `/shop/${_id}` : "#"} className="size-full">
+              <Link
+                href={productId ? `/shop/${productId}` : "#"}
+                className="size-full"
+              >
                 <Thumbnail image={image} name={name} />
               </Link>
               {tags && tags?.length > 0 && <Tags tags={tags} />}
@@ -146,7 +184,7 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
             </div>
             <div className="flex grow flex-col space-y-[0.5em] bg-card px-[1em] py-[1em]">
               <Link
-                href={_id ? `/shop/${_id}` : "#"}
+                href={productId ? `/shop/${productId}` : "#"}
                 className="grid grow gap-[0.5em]"
               >
                 <h3 className="text-[1em] leading-none text-title">{name}</h3>
@@ -160,7 +198,7 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
                 <RatingReviews rating={rating} totalReviews={totalReviews} />
               )}
               <div className="flex items-center justify-between gap-[0.5em]">
-                <div></div>
+                <StocksColorTabTriggers stocks={stocks} />
                 <Price
                   price={selling_price}
                   originalPrice={original_price}
@@ -171,7 +209,8 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
                 <AddToCardButton
                   className="primary w-full rounded-md rounded-t-none text-[0.875em] uppercase hover:bg-primary/75 group-hover/card:bg-primary group-hover/card:text-primary-foreground"
                   variant="outline"
-                  id={_id}
+                  productId={productId}
+                  stockId={stockId}
                   availableQuantity={availableQuantity}
                 >
                   <span>Add to Cart</span>{" "}
@@ -191,7 +230,10 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
         >
           <div className="flex size-full">
             <div className="relative min-h-[12em] w-full min-w-[8em] flex-1 self-stretch">
-              <Link href={_id ? `/shop/${_id}` : "#"} className="size-full">
+              <Link
+                href={productId ? `/shop/${productId}` : "#"}
+                className="size-full"
+              >
                 <Thumbnail image={image} name={name} />
               </Link>
               {tags && tags?.length > 0 && <Tags tags={tags} />}
@@ -201,7 +243,7 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
             </div>
             <div className="flex min-w-[13.5em] flex-1 flex-shrink-0 grow flex-col space-y-[0.5em] self-stretch bg-card px-[1em] py-[1em]">
               <Link
-                href={_id ? `/shop/${_id}` : "#"}
+                href={productId ? `/shop/${productId}` : "#"}
                 className="grid grow gap-[0.5em]"
               >
                 <h3 className="text-[1em] leading-none text-title">{name}</h3>
@@ -215,7 +257,7 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
                 <RatingReviews rating={rating} totalReviews={totalReviews} />
               )}
               <div className="flex items-center justify-between gap-[0.5em]">
-                <div></div>
+                <StocksColorTabTriggers stocks={stocks} />
                 <Price
                   price={selling_price}
                   originalPrice={original_price}
@@ -226,7 +268,8 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
                 <AddToCardButton
                   className="primary w-full rounded-md rounded-t-none text-[0.875em] uppercase hover:bg-primary/75 group-hover/card:bg-primary group-hover/card:text-primary-foreground"
                   variant="outline"
-                  id={_id}
+                  productId={productId}
+                  stockId={stockId}
                   availableQuantity={availableQuantity}
                 >
                   <span>Add to Cart</span>{" "}
@@ -245,13 +288,13 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
           )}
         >
           <div
-            href={_id ? `/shop/${_id}` : "#"}
+            href={productId ? `/shop/${productId}` : "#"}
             value={0}
             className="flex size-full"
           >
             <div className="relative min-h-[10em] w-full min-w-[8em] flex-1 self-stretch">
               <Link
-                href={_id ? `/shop/${_id}` : "#"}
+                href={productId ? `/shop/${productId}` : "#"}
                 className="block size-full"
               >
                 <Thumbnail className="h-[10em]" image={image} name={name} />
@@ -263,7 +306,7 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
             </div>
             <div className="flex w-[13.5em] flex-1 flex-shrink-0 grow flex-col space-y-[0.5em] self-stretch bg-card px-[1em] py-[1em]">
               <Link
-                href={_id ? `/shop/${_id}` : "#"}
+                href={productId ? `/shop/${productId}` : "#"}
                 className="grid grow gap-[0.5em]"
               >
                 <h3 className="text-[1em] leading-none text-title">{name}</h3>
@@ -281,7 +324,7 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
                 />
               )}
               <div className="flex flex-wrap items-center justify-between gap-[0.5em]">
-                <div></div>
+                <StocksColorTabTriggers stocks={stocks} />
                 <Price
                   price={selling_price}
                   originalPrice={original_price}
@@ -292,7 +335,8 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
                 <AddToCardButton
                   className="primary h-[2.5em] w-full rounded-md rounded-t-none text-[0.875em] uppercase hover:bg-primary/75 group-hover/card:bg-primary group-hover/card:text-primary-foreground"
                   variant="outline"
-                  id={_id}
+                  productId={productId}
+                  stockId={stockId}
                   availableQuantity={availableQuantity}
                 >
                   <span>Add to Cart</span>{" "}
@@ -303,7 +347,27 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
           </div>
         </div>
       )}
-    </>
+    </TabsItem>
+  );
+};
+
+const ProductCard = ({ item, className, variant = "grid" }) => {
+  const { stocks } = item;
+
+  return (
+    <Tabs value={stocks?.[0]?._id || ""}>
+      <TabsContent>
+        {stocks?.map((stock, index) => (
+          <ProductCardTab
+            key={index}
+            product={item}
+            stock={stock}
+            className={className}
+            variant={variant}
+          />
+        ))}
+      </TabsContent>
+    </Tabs>
   );
 };
 

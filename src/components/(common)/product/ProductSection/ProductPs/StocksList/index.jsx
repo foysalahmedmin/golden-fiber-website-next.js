@@ -1,42 +1,31 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
+import { TabsTrigger } from "@/components/ui/Tabs";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 
-const StocksList = ({ className, stocks, stock }) => {
-  const pathname = usePathname();
-
+const StocksList = ({ className, stocks }) => {
   return (
     <div className={cn("flex items-center gap-4", className)}>
       <span className="inline-block text-xl">Colors:</span>
       <div className="flex flex-wrap justify-start gap-[0.5em] overflow-visible overflow-x-visible overflow-y-visible px-[0.25em]">
-        {stocks?.map((item, i) => {
-          const isActive = stock?._id === item?._id;
+        {stocks?.map((stock, i) => {
           return (
-            <Link
+            <TabsTrigger
               key={i}
-              className={cn(
-                "flex size-[1.5rem] overflow-hidden rounded-full after:hidden",
-                {
-                  "ring-[0.15rem] ring-muted-foreground/50 ring-offset-[0.15rem]":
-                    isActive,
-                },
-              )}
-              href={`${pathname}?stock=${item?._id}`}
-              replace={true}
-              scroll={false}
+              value={stock?._id}
+              className="flex size-[1.5rem] overflow-hidden rounded-full border-0 after:hidden"
+              activeClassName="ring-[0.15rem] ring-muted-foreground/50 ring-offset-[0.15rem]"
             >
               <Button
-                style={{ background: item?.color?.code }}
+                style={{ background: stock?.color?.code }}
                 className="size-full rounded-full"
                 variant="none"
                 shape="icon"
                 size="sm"
                 asChild={true}
               />
-            </Link>
+            </TabsTrigger>
           );
         })}
       </div>

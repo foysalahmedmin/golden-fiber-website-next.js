@@ -19,8 +19,8 @@ const SubscriptionBanner = ({ className }) => {
                   Stay home & get your daily needs from our shop
                 </h1>
                 <span className="mt-2 block">
-                  Start Your Daily Shopping with
-                  <span className="text-primary"> {project?.name}</span>
+                  Start Your Daily Shopping with{" "}
+                  <span className="text-primary">{project?.name}</span>
                 </span>
               </div>
               <form className="max-w-md">

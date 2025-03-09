@@ -1,15 +1,40 @@
+"use client";
+
 import { colors } from "@/assets/data/colors";
-import { sizes } from "@/assets/data/sizes";
 import {
   MaxInput,
   MinInput,
   RangeSlider,
   RangeSliderInput,
 } from "@/components/ui/RangeSlider";
+import { useDebounce } from "@/hooks/utils/useDebounce";
 import { cn } from "@/lib/utils";
 import { convertColorFormat } from "@/utils/convertColorFormat";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const PriceAndVariants = ({ className }) => {
+  const [minValue, setMinValue] = useState(0);
+  const [maxValue, setMaxValue] = useState(10000);
+
+  const minValueDebounced = useDebounce(minValue, 1000);
+  const maxValueDebounced = useDebounce(maxValue, 1000);
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const currentParams = new URLSearchParams(searchParams.toString());
+  currentParams.set("price_min", minValueDebounced);
+  currentParams.set("price_max", maxValueDebounced);
+
+  useEffect(() => {
+    if (minValueDebounced !== 0 || maxValueDebounced !== 10000) {
+      router.replace(`?${currentParams.toString()}`, {
+        scroll: false,
+        replace: true,
+      });
+    }
+  }, [minValueDebounced, maxValueDebounced]);
+
   return (
     <div className={cn("overflow-y-auto rounded-md border py-6", className)}>
       <div className="mb-4 px-4">
@@ -17,7 +42,13 @@ const PriceAndVariants = ({ className }) => {
       </div>
       <div className="space-y-4 md:space-y-6">
         <div className="px-4">
-          <RangeSlider className="mb-4 space-y-4">
+          <RangeSlider
+            minValue={minValue}
+            maxValue={maxValue}
+            setMinValue={setMinValue}
+            setMaxValue={setMaxValue}
+            className="mb-4 space-y-4"
+          >
             <div className="flex items-center gap-2">
               <MinInput />
               -
@@ -58,7 +89,7 @@ const PriceAndVariants = ({ className }) => {
             ))}
           </ul>
         </div>
-        <hr />
+        {/* <hr />
         <div className="px-4">
           <strong className="mb-4 block uppercase text-foreground">
             Sizes:
@@ -78,7 +109,7 @@ const PriceAndVariants = ({ className }) => {
               </li>
             ))}
           </ul>
-        </div>
+        </div> */}
       </div>
     </div>
   );

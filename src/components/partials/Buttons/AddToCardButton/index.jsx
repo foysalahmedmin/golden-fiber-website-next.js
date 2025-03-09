@@ -8,7 +8,7 @@ import { forwardRef } from "react";
 const AddToCardButton = forwardRef(
   (
     {
-      id,
+      productId,
       stockId,
       availableQuantity,
       quantity,
@@ -20,10 +20,15 @@ const AddToCardButton = forwardRef(
     ref,
   ) => {
     const { addItemToCart } = useCart();
+    const handleAddToCart = (e) => {
+      e.stopPropagation();
+      addItemToCart({ id: stockId, quantity: quantity });
+    };
+
     return (
       <Button
         disabled={!availableQuantity || availableQuantity < 1 || disabled}
-        onClick={() => addItemToCart({ id: stockId, quantity: quantity })}
+        onClick={(e) => handleAddToCart(e)}
         className={cn("", className)}
         {...props}
         ref={ref}

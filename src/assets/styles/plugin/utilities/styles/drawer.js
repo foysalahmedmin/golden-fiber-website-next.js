@@ -1,12 +1,6 @@
 const drawerStyles = () => {
   return {
     ".drawer-open": {
-      position: "static",
-      transform: "scale(1)",
-      visibility: "visible",
-      opacity: "1",
-      transitionDelay: "0s",
-
       "& > .drawer-backdrop": {
         all: "unset",
         display: "none",

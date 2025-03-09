@@ -1,18 +1,7 @@
 const drawerStyles = () => {
   return {
     ".drawer": {
-      position: "fixed",
-      transform: "scale(0)",
-      visibility: "hidden",
-      opacity: "0",
-      transitionDelay: "300ms",
-      inset: "0",
-      overflow: "hidden",
       "&.open, &[open]": {
-        transform: "scale(1)",
-        visibility: "visible",
-        opacity: "1",
-        transitionDelay: "0s",
         "& > .drawer-backdrop": {
           transform: "scale(1)",
           visibility: "visible",
@@ -28,7 +17,7 @@ const drawerStyles = () => {
       },
     },
     ".drawer-backdrop": {
-      position: "absolute",
+      position: "fixed",
       transform: "scale(0)",
       visibility: "hidden",
       opacity: "0",
@@ -41,7 +30,7 @@ const drawerStyles = () => {
       overflow: "hidden",
     },
     ".drawer-content": {
-      position: "absolute",
+      position: "fixed",
       transform: "scaleX(0)",
       visibility: "hidden",
       opacity: "0",

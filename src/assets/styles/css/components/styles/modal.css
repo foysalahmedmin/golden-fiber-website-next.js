@@ -1,22 +1,7 @@
 .modal {
-  position: fixed;
-  transform: scale(0);
-  visibility: hidden;
-  opacity: 0;
-  transition-delay: 300ms;
-  inset: 0;
-  overflow: hidden;
-
   &.open,
   &[open] {
-    transform: scale(1);
-    visibility: visible;
-    opacity: 1;
-    transition-delay: 0s;
-    overscroll-behavior-x: contain;
-    overscroll-behavior-y: contain;
-
-    & > .drawer-backdrop {
+    & > .modal-backdrop {
       transform: scale(1);
       visibility: visible;
       opacity: 1;
@@ -25,7 +10,7 @@
       overscroll-behavior-y: contain;
     }
 
-    & > .drawer-content {
+    & > .modal-content {
       transform: scale(1);
       visibility: visible;
       opacity: 1;
@@ -37,7 +22,7 @@
 }
 
 .modal-backdrop {
-  position: absolute;
+  position: fixed;
   transform: scale(0);
   visibility: hidden;
   opacity: 0;
@@ -53,8 +38,8 @@
 }
 
 .modal-content {
-  position: absolute;
-  transform: scaleX(0);
+  position: fixed;
+  transform: scale(0);
   visibility: hidden;
   opacity: 0;
   transition:

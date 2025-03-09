@@ -23,7 +23,6 @@
   opacity: 0;
   z-index: 10;
   transition: all 0.3s ease;
-  transition: all 0.3s ease;
   border: 1px solid theme("colors.border");
   border-radius: 0.125em;
   background-color: theme("colors.card.DEFAULT");

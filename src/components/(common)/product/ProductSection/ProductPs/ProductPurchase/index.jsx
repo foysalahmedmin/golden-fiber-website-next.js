@@ -15,7 +15,7 @@ import { useState } from "react";
 
 const ProductPurchase = ({ className, product, stock }) => {
   const { getItemQuantityFromCart } = useCart();
-  const { _id } = product;
+  const { _id: productId } = product;
   const { _id: stockId, quantity: availableQuantity } = stock || {};
   const wishListed = false;
   const [quantity, setQuantity] = useState(1);
@@ -36,7 +36,7 @@ const ProductPurchase = ({ className, product, stock }) => {
 
       {/* <BayNowButton className="flex-1 px-6" /> */}
       <AddToCardButton
-        id={_id}
+        productId={productId}
         stockId={stockId}
         quantity={quantity}
         disabled={getItemQuantityFromCart({ id: stockId }) === quantity}

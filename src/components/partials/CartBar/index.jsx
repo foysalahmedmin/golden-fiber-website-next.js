@@ -38,9 +38,11 @@ const CartBar = ({ isOpen, setIsOpen, size = "base", side = "right" }) => {
                   >
                     <ShoppingBag className="size-6" />
                   </Button>
-                  <span className="absolute right-1 top-1 inline-flex aspect-square min-h-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-accent text-[0.5rem] font-bold leading-none text-accent-foreground">
-                    {cartProducts?.length || 0}
-                  </span>
+                  {cartProducts?.length > 0 && (
+                    <span className="absolute right-1 top-1 inline-flex aspect-square min-h-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-accent text-[0.5rem] font-bold leading-none text-accent-foreground">
+                      {cartProducts?.length || 0}
+                    </span>
+                  )}
                 </div>
               </div>
               <div className="text-center">

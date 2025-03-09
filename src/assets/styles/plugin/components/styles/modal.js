@@ -1,20 +1,7 @@
 const modalStyles = () => {
   return {
     ".modal": {
-      position: "fixed",
-      transform: "scale(0)",
-      visibility: "hidden",
-      opacity: "0",
-      transitionDelay: "300ms",
-      inset: "0",
-      overflow: "hidden",
       "&.open, &[open]": {
-        transform: "scale(1)",
-        visibility: "visible",
-        opacity: "1",
-        transitionDelay: "0s",
-        overscrollBehaviorX: "contain",
-        overscrollBehaviorY: "contain",
         "& > .modal-backdrop": {
           transform: "scale(1)",
           visibility: "visible",
@@ -34,7 +21,7 @@ const modalStyles = () => {
       },
     },
     ".modal-backdrop": {
-      position: "absolute",
+      position: "fixed",
       transform: "scale(0)",
       visibility: "hidden",
       opacity: "0",
@@ -47,7 +34,7 @@ const modalStyles = () => {
       overflow: "hidden",
     },
     ".modal-content": {
-      position: "absolute",
+      position: "fixed",
       transform: "scale(0)",
       visibility: "hidden",
       opacity: "0",
