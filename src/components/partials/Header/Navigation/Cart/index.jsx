@@ -10,6 +10,7 @@ import { useState } from "react";
 const Cart = ({ access, user }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { cartProducts } = useCart();
+
   return (
     <div className="relative flex flex-col">
       <Button

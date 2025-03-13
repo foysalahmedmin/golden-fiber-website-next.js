@@ -1,20 +1,19 @@
-import {
-  addItemToLocalCart,
-  clearLocalCart,
-  getLocalCart,
-  removeItemFromLocalCart,
-} from "@/utils/cartStorage";
+import cartStorage from "@/utils/cartStorage";
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = getLocalCart() || {};
+const initialState = {
+  items: cartStorage.getCartItems() || {},
+  products: [],
+  isLoading: false,
+};
 
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addItemToCart: (state, { payload }) => {
+    addCartItem: (state, { payload }) => {
       const { id, quantity } = payload;
-      addItemToLocalCart(id, quantity);
+      cartStorage?.addCartItem(id, quantity);
 
       if (quantity !== undefined) {
         if (quantity < 1) {
@@ -23,25 +22,39 @@ export const cartSlice = createSlice({
           state[id] = quantity;
         }
       } else {
-        state[id] = (state[id] || 0) + 1;
+        state.items[id] = (state[id] || 0) + 1;
       }
     },
 
-    removeItemFromCart: (state, { payload }) => {
+    removeCartItem: (state, { payload }) => {
       const { id } = payload;
-      removeItemFromLocalCart(id);
-      if (id in state) {
-        delete state[id];
+      cartStorage?.removeCartItem(id);
+      if (id in state.items) {
+        delete state.items[id];
       }
+    },
+
+    setCartProducts: (state, { payload }) => {
+      state.products = payload;
     },
 
     clearCart: (state) => {
-      clearLocalCart();
-      Object.keys(state).forEach((id) => delete state[id]);
+      cartStorage?.clearCartItems();
+      state.items = {};
+      state.products = [];
+    },
+
+    setLoading: (state, { payload }) => {
+      state.isLoading = payload;
     },
   },
 });
 
-export const { addItemToCart, removeItemFromCart, clearCart } =
-  cartSlice.actions;
+export const {
+  addCartItem,
+  removeCartItem,
+  setCartProducts,
+  clearCart,
+  setLoading,
+} = cartSlice.actions;
 export default cartSlice.reducer;

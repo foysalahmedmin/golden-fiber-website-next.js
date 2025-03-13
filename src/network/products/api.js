@@ -12,6 +12,7 @@ export const getAllProducts = async ({
   date_to,
   is_today_deal,
   is_featured,
+  colors,
   sort,
 } = {}) => {
   const endpoint = `${urls.url}/api/product/physical/get_products`;
@@ -19,18 +20,19 @@ export const getAllProducts = async ({
   // Build query parameters conditionally
   const params = new URLSearchParams();
 
-  if (page) params.append("page", page);
-  if (limit) params.append("limit", limit);
-  if (search) params.append("search", search);
-  if (category) params.append("category", category);
-  if (sub_category) params.append("sub_category", sub_category);
-  if (price_min) params.append("price_min", price_min);
-  if (price_max) params.append("price_max", price_max);
-  if (date_from) params.append("date_from", date_from);
-  if (date_to) params.append("date_to", date_to);
-  if (is_today_deal) params.append("is_today_deal", true);
-  if (is_featured) params.append("is_today_deal", true);
-  if (sort) params.append("sort", sort);
+  if (page) params.set("page", page);
+  if (limit) params.set("limit", limit);
+  if (search) params.set("search", search);
+  if (category) params.set("category", category);
+  if (sub_category) params.set("sub_category", sub_category);
+  if (colors) params.set("colors", colors);
+  if (price_min) params.set("price_min", price_min);
+  if (price_max) params.set("price_max", price_max);
+  if (date_from) params.set("date_from", date_from);
+  if (date_to) params.set("date_to", date_to);
+  if (is_today_deal) params.set("is_today_deal", true);
+  if (is_featured) params.set("is_today_deal", true);
+  if (sort) params.set("sort", sort);
 
   const urlWithQuery = `${endpoint}?${params.toString()}`;
   try {
@@ -82,7 +84,7 @@ export const getCartProducts = async ({ ids = [] } = {}) => {
   // Build query parameters conditionally
   const params = new URLSearchParams();
 
-  if (ids) params.append("ids", ids?.join(","));
+  if (ids) params.set("ids", ids?.join(","));
 
   const urlWithQuery = `${endpoint}?${params.toString()}`;
   try {

@@ -1,45 +1,46 @@
-const addItemToLocalCart = (id, quantity) => {
-  const shoppingCart = getLocalCart();
-  if (quantity !== undefined) {
-    if (quantity < 1) {
-      removeItemFromLocalCart(id);
-      return;
+const cartStorage = {
+  getCartItems: function () {
+    if (typeof window === "undefined") return {};
+    const storedCart = localStorage.getItem("cart");
+    return storedCart ? JSON.parse(storedCart) : {};
+  },
+
+  addCartItem: function (id, quantity) {
+    if (typeof window === "undefined") return;
+    const cartItems = this.getCartItems();
+
+    if (quantity !== undefined) {
+      if (quantity < 1) {
+        this.removeCartItem(id);
+        return;
+      }
+      cartItems[id] = quantity;
     } else {
-      shoppingCart[id] = quantity;
-      localStorage.setItem("cart", JSON.stringify(shoppingCart));
+      cartItems[id] = (cartItems[id] || 0) + 1;
     }
-  } else {
-    shoppingCart[id] = (shoppingCart[id] || 0) + 1;
-    localStorage.setItem("cart", JSON.stringify(shoppingCart));
-  }
+
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  },
+
+  removeCartItem: function (id) {
+    if (typeof window === "undefined") return;
+    const cartItems = this.getCartItems();
+    if (id in cartItems) {
+      delete cartItems[id];
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+    }
+  },
+
+  getCartItemQuantity: function (id) {
+    if (typeof window === "undefined") return 0;
+    const cartItems = this.getCartItems();
+    return cartItems[id] || 0;
+  },
+
+  clearCartItems: function () {
+    if (typeof window === "undefined") return;
+    localStorage.removeItem("cart");
+  },
 };
 
-const removeItemFromLocalCart = (id) => {
-  const shoppingCart = getLocalCart();
-  if (id in shoppingCart) {
-    delete shoppingCart[id];
-    localStorage.setItem("cart", JSON.stringify(shoppingCart));
-  }
-};
-
-const getItemQuantityFromLocalCart = (id) => {
-  const shoppingCart = getLocalCart();
-  return shoppingCart[id] || 0;
-};
-
-const getLocalCart = () => {
-  const storedCart = localStorage.getItem("cart");
-  return storedCart ? JSON.parse(storedCart) : {};
-};
-
-const clearLocalCart = () => {
-  localStorage.removeItem("cart");
-};
-
-export {
-  addItemToLocalCart,
-  clearLocalCart,
-  getItemQuantityFromLocalCart,
-  getLocalCart,
-  removeItemFromLocalCart,
-};
+export default cartStorage;

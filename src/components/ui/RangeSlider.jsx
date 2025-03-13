@@ -30,8 +30,8 @@ const RangeSlider = forwardRef(
   (
     {
       className,
-      minValue: minValueProp = 2500,
-      maxValue: maxValueProp = 7500,
+      minValue: minValueProp,
+      maxValue: maxValueProp,
       setMinValue: setMinValueProp,
       setMaxValue: setMaxValueProp,
       minGap = 500,
@@ -43,8 +43,8 @@ const RangeSlider = forwardRef(
     },
     ref,
   ) => {
-    const [minValue, setMinValue] = useState(minValueProp);
-    const [maxValue, setMaxValue] = useState(maxValueProp);
+    const [minValue, setMinValue] = useState(minValueProp || minLimit);
+    const [maxValue, setMaxValue] = useState(maxValueProp || maxLimit);
 
     const minInputRef = useRef(null);
     const maxInputRef = useRef(null);

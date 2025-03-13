@@ -1,6 +1,3 @@
-import Link from "next/link";
-import ThemeToggler from "../Navigation/ThemeToggler";
-
 const TopHeader = () => {
   return (
     <div className="h-10 bg-dark text-light">
@@ -8,7 +5,7 @@ const TopHeader = () => {
         <div>
           <p className="hidden lg:block">Welcome to golden-fiver</p>
         </div>
-        <div className="flex items-center divide-x">
+        {/* <div className="flex items-center divide-x">
           <Link
             href="/seller/sign-up"
             className="group flex items-center gap-1 pr-2 text-sm hover:text-primary md:text-base"
@@ -24,7 +21,7 @@ const TopHeader = () => {
           <div className="inline-flex px-2 lg:hidden">
             <ThemeToggler />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

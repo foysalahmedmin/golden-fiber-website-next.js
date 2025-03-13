@@ -1,6 +1,5 @@
 "use client";
 
-import { Checkbox } from "@/components/ui/Checkbox";
 import { FormControl } from "@/components/ui/FormControl";
 import { cn } from "@/lib/utils";
 import {
@@ -9,13 +8,12 @@ import {
   SetCartEmail,
   SetCartName,
   SetCartPhone,
-  ToggleAsProfile,
 } from "@/redux/slices/orderSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const DeliveryFormSection = ({ className }) => {
   const dispatch = useDispatch();
-  const { email, name, city, address, postal, phone, as_profile } = useSelector(
+  const { email, name, city, address, phone, as_profile } = useSelector(
     (state) => state.order,
   );
   return (
@@ -91,22 +89,6 @@ const DeliveryFormSection = ({ className }) => {
                 />
               </label>
             </div>
-            {/* <div>
-              <label>
-                <span className="mb-1 inline-block text-sm font-medium capitalize text-title">
-                  Postcode/ZIP Code*
-                </span>
-                <FormControl
-                  value={postal}
-                  disabled={as_profile}
-                  onChange={(e) => dispatch(SetCartPostal(e.target.value))}
-                  type="text"
-                  placeholder="Enter Your Postcode/ZIP Code"
-                  name="postcode"
-                  required
-                />
-              </label>
-            </div> */}
             <div>
               <label>
                 <span className="mb-1 inline-block text-sm font-medium capitalize text-title">
@@ -131,7 +113,7 @@ const DeliveryFormSection = ({ className }) => {
                 </FormControl>
               </label>
             </div>
-            <div>
+            {/* <div>
               <label className="flex cursor-pointer items-center gap-2">
                 <Checkbox
                   value={as_profile}
@@ -144,7 +126,7 @@ const DeliveryFormSection = ({ className }) => {
                   Use as profile address
                 </span>
               </label>
-            </div>
+            </div> */}
           </form>
         </div>
       </div>

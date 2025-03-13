@@ -30,7 +30,7 @@ const SHIPPING_LIST = [
 
 const PaymentSection = ({ className }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isAgree, setIsAgree] = useState(false);
+  const [isAgree, setIsAgree] = useState(true);
   const [shipping, setShipping] = useState({
     id: 1,
     label: "Dhaka",
@@ -40,12 +40,8 @@ const PaymentSection = ({ className }) => {
 
   const dispatch = useDispatch();
   const router = useRouter();
-  const {
-    cartProducts,
-    subtotal,
-    getItemQuantityFromCart,
-    getItemSubtotalFromCart,
-  } = useCart();
+  const { cartProducts, subtotal, getCartItemQuantity, getCartItemSubtotal } =
+    useCart();
   const { email, name, address, postal, phone, payment_method, city } =
     useSelector((state) => state.order);
 
@@ -86,10 +82,11 @@ const PaymentSection = ({ className }) => {
             stock: item?.stock?._id,
             color: item?.stock?.color?._id,
             unit_price: Number(item?.stock?.selling_price || 0),
-            quantity: getItemQuantityFromCart({ id: item?._id }),
+            quantity: getCartItemQuantity({ id: item?._id }),
           };
         }),
       });
+
       toast.success("Order Complete");
 
       if (payment_method === "offline") {
@@ -205,7 +202,7 @@ const PaymentSection = ({ className }) => {
               <div key={index} className="flex items-start">
                 <div className="flex-1">
                   <span className="block text-title/85">
-                    {getItemQuantityFromCart({ id: item?._id })} × {item?.name}
+                    {getCartItemQuantity({ id: item?._id })} × {item?.name}
                   </span>
                   <div className="flex items-center gap-2 text-sm">
                     <div>
@@ -215,7 +212,7 @@ const PaymentSection = ({ className }) => {
                 </div>
                 <div className="min-w-20 text-right">
                   <span className="inline-block font-medium uppercase text-title">
-                    {getItemSubtotalFromCart({
+                    {getCartItemSubtotal({
                       id: item?._id,
                       price: item?.stocks?.selling_price,
                     })?.toFixed(2)}
@@ -288,7 +285,7 @@ const PaymentSection = ({ className }) => {
       </div>
       <div>
         <Button
-          disabled={isLoading || !isAgree}
+          disabled={isLoading || !isAgree || !cartProducts?.length}
           onClick={handleGuestOrder}
           className="primary w-full text-sm uppercase"
         >

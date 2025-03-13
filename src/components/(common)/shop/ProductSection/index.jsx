@@ -6,7 +6,7 @@ import {
   DrawerContent,
   DrawerTrigger,
 } from "@/components/ui/Drawer";
-import { Pagination } from "@/components/ui/Pagination";
+import { QueryPagination } from "@/components/ui/QueryPagination";
 import { getAllProducts } from "@/network/products/api";
 import { Menu } from "lucide-react";
 import ProductSort from "./ProductSort";
@@ -14,18 +14,20 @@ import ProductSort from "./ProductSort";
 const ProductSection = async ({ searchParams }) => {
   const {
     page = 1,
-    limit = 10,
+    limit = 12,
     category,
     sub_category,
+    colors,
     price_min,
     price_max,
     sort,
   } = await searchParams;
-  const { data: products } = await getAllProducts({
+  const { data: products, total = 0 } = await getAllProducts({
     page,
     limit,
     category,
     sub_category,
+    colors,
     price_min,
     price_max,
     sort,
@@ -65,10 +67,20 @@ const ProductSection = async ({ searchParams }) => {
                 <ProductCard key={index} item={item} />
               ))}
             </div>
-            <div className="mt-6 flex items-center justify-between md:mt-8">
-              <div></div>
-              <Pagination pages={1} currentPage={1} />
-            </div>
+            {total === 0 && (
+              <div className="flex h-48 items-center justify-center">
+                <p className="text-gray-400">No products found</p>
+              </div>
+            )}
+            {total > 0 && (
+              <div className="mt-6 flex items-center justify-between md:mt-8">
+                <div></div>
+                <QueryPagination
+                  pages={Math.ceil(total / limit)}
+                  currentPage={page}
+                />
+              </div>
+            )}
           </div>
         </div>
       </Drawer>

@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 
 const ProductPurchase = ({ className, product, stock }) => {
-  const { getItemQuantityFromCart } = useCart();
+  const { getCartItemQuantity } = useCart();
   const { _id: productId } = product;
   const { _id: stockId, quantity: availableQuantity } = stock || {};
   const wishListed = false;
@@ -39,7 +39,7 @@ const ProductPurchase = ({ className, product, stock }) => {
         productId={productId}
         stockId={stockId}
         quantity={quantity}
-        disabled={getItemQuantityFromCart({ id: stockId }) === quantity}
+        disabled={getCartItemQuantity({ id: stockId }) === quantity}
         variant="outline"
         className="primary flex-1 hover:bg-accent hover:text-accent-foreground disabled:opacity-5"
       />

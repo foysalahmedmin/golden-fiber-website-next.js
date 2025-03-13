@@ -1,6 +1,5 @@
 "use client";
 
-import { colors } from "@/assets/data/colors";
 import {
   MaxInput,
   MinInput,
@@ -9,26 +8,60 @@ import {
 } from "@/components/ui/RangeSlider";
 import { useDebounce } from "@/hooks/utils/useDebounce";
 import { cn } from "@/lib/utils";
+import { getFilterColors } from "@/network/inventories/api";
 import { convertColorFormat } from "@/utils/convertColorFormat";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const PriceAndVariants = ({ className }) => {
-  const [minValue, setMinValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(10000);
-
-  const minValueDebounced = useDebounce(minValue, 1000);
-  const maxValueDebounced = useDebounce(maxValue, 1000);
-
-  const searchParams = useSearchParams();
   const router = useRouter();
-  const currentParams = new URLSearchParams(searchParams.toString());
-  currentParams.set("price_min", minValueDebounced);
-  currentParams.set("price_max", maxValueDebounced);
+  const searchParams = useSearchParams();
+  const existingParams = new URLSearchParams(searchParams.toString());
+  const updatedParams = new URLSearchParams(searchParams.toString());
+
+  const [colors, setColors] = useState([]);
+
+  const selectedColors = existingParams.get("colors")
+    ? decodeURIComponent(existingParams.get("colors") || "")
+        .split(",")
+        .filter(Boolean)
+    : [];
+
+  const [minValue, setMinValue] = useState(null);
+  const [maxValue, setMaxValue] = useState(null);
+
+  const minValueDebounced = useDebounce(minValue, 500);
+  const maxValueDebounced = useDebounce(maxValue, 500);
 
   useEffect(() => {
-    if (minValueDebounced !== 0 || maxValueDebounced !== 10000) {
-      router.replace(`?${currentParams.toString()}`, {
+    const fetchColors = async () => {
+      const data = await getFilterColors();
+      setColors(data || []);
+    };
+    fetchColors();
+  }, []);
+
+  const handleColorSelection = (color) => {
+    const updatedColors = selectedColors.includes(color)
+      ? selectedColors.filter((selected) => selected !== color)
+      : [...selectedColors, color];
+
+    updatedColors?.length > 0
+      ? updatedParams.set("colors", encodeURIComponent(updatedColors.join(",")))
+      : updatedParams.delete("colors");
+
+    router.replace(`?${updatedParams.toString()}`, {
+      scroll: false,
+      replace: true,
+    });
+  };
+
+  useEffect(() => {
+    if (minValueDebounced || maxValueDebounced) {
+      minValueDebounced && updatedParams.set("price_min", minValueDebounced);
+      maxValueDebounced && updatedParams.set("price_max", maxValueDebounced);
+
+      router.replace(`?${updatedParams.toString()}`, {
         scroll: false,
         replace: true,
       });
@@ -65,28 +98,31 @@ const PriceAndVariants = ({ className }) => {
             Colors:
           </strong>
           <ul className="grid w-full gap-2 md:grid-cols-2">
-            {colors?.map((item, i) => (
-              <li key={i}>
-                <label
-                  style={{
-                    "--accent":
-                      `${convertColorFormat(item?.hex, "hsl")}`.replace(
-                        /hsl\((\d+),\s*(\d+%)\s*,\s*(\d+%)\)/,
-                        "$1 $2 $3",
-                      ),
-                  }}
-                  className="inline-flex cursor-pointer items-center gap-2"
-                >
-                  <input
-                    type="checkbox"
-                    className="checkbox rounded-full border-2 border-accent bg-accent/25 text-2xl hover:bg-accent/75"
-                    name={item?.value}
-                    value={item?.value}
-                  />
-                  <span className="capitalize">{item?.label}</span>
-                </label>
-              </li>
-            ))}
+            {Array.isArray(colors) &&
+              colors?.map((color, i) => (
+                <li key={i}>
+                  <label
+                    style={{
+                      "--accent":
+                        `${convertColorFormat(color?.code, "hsl")}`.replace(
+                          /hsl\((\d+),\s*(\d+%)\s*,\s*(\d+%)\)/,
+                          "$1 $2 $3",
+                        ),
+                    }}
+                    className="inline-flex cursor-pointer items-center gap-2"
+                  >
+                    <input
+                      type="checkbox"
+                      className="checkbox rounded-full border-2 border-accent bg-accent/25 text-2xl hover:bg-accent/75"
+                      name={color?.code}
+                      value={color?.code || ""}
+                      checked={selectedColors.includes(color?.code)}
+                      onChange={() => handleColorSelection(color?.code)}
+                    />
+                    <span className="capitalize">{color?.name}</span>
+                  </label>
+                </li>
+              ))}
           </ul>
         </div>
         {/* <hr />

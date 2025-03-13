@@ -1,75 +1,119 @@
 import { getCartProducts } from "@/network/products/api";
 import {
-  addItemToCart as addItemToCartSlice,
+  addCartItem as addCartItemSlice,
   clearCart as clearCartSlice,
-  removeItemFromCart as removeItemFromCartSlice,
+  removeCartItem as removeCartItemSlice,
+  setCartProducts as setCartProductsSlice,
+  setLoading as setLoadingSlice,
 } from "@/redux/slices/cartSlice";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-function getValidNumber(value, fallback = 0) {
-  return isNaN(value) ? fallback : value;
-}
+const getValidNumber = (value, fallback = 0) =>
+  isNaN(value) ? fallback : value;
 
 const useCart = () => {
   const dispatch = useDispatch();
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [cartProducts, setCartProducts] = useState([]);
+  // Selectors
+  const cartItems = useSelector((state) => state.cart.items);
+  const cartProducts = useSelector((state) => state.cart.products);
+  const isLoading = useSelector((state) => state.cart.isLoading);
 
-  const cart = useSelector((state) => state.cart);
+  // Memoized cart item IDs for dependency tracking
+  const cartItemIds = useMemo(() => Object.keys(cartItems).sort(), [cartItems]);
 
-  const addItemToCart = (payload) => dispatch(addItemToCartSlice(payload));
-  const removeItemFromCart = (payload) =>
-    dispatch(removeItemFromCartSlice(payload));
-  const clearCart = () => dispatch(clearCartSlice());
+  // Action dispatchers
+  const setIsLoading = useCallback(
+    (payload) => dispatch(setLoadingSlice(payload)),
+    [dispatch],
+  );
+  const clearCart = useCallback(
+    (payload) => dispatch(clearCartSlice(payload)),
+    [dispatch],
+  );
+  const addCartItem = useCallback(
+    (payload) => dispatch(addCartItemSlice(payload)),
+    [dispatch],
+  );
+  const removeCartItem = useCallback(
+    (payload) => dispatch(removeCartItemSlice(payload)),
+    [dispatch],
+  );
+  const setCartProducts = useCallback(
+    (payload) => dispatch(setCartProductsSlice(payload)),
+    [dispatch],
+  );
 
-  const getItemQuantityFromCart = ({ id } = {}) => cart[id] || 0;
-  const getItemSubtotalFromCart = ({ id, price } = {}) => {
-    return getValidNumber(
-      parseFloat(price || 0) * parseFloat(getItemQuantityFromCart({ id }) || 0),
-    );
-  };
+  // Helper functions
+  const getCartItemQuantity = useCallback(
+    ({ id } = {}) => cartItems[id] || 0,
+    [cartItems],
+  );
 
-  const subtotal =
-    cartProducts?.reduce(
-      (acc, { stock }) =>
-        acc +
-        getItemSubtotalFromCart({
-          id: stock?._id,
-          price: stock?.selling_price,
-        }),
-      0,
-    ) || 0;
+  const getCartItemSubtotal = useCallback(
+    ({ id, price } = {}) => {
+      const quantity = getCartItemQuantity({ id });
+      return getValidNumber(parseFloat(price || 0) * quantity);
+    },
+    [getCartItemQuantity],
+  );
 
-  const cartIds = Object.keys(cart) || [];
+  // Memoized calculations
+  const subtotal = useMemo(
+    () =>
+      (cartProducts || []).reduce(
+        (acc, { stock }) =>
+          acc +
+          getCartItemSubtotal({
+            id: stock?._id,
+            price: stock?.selling_price,
+          }),
+        0,
+      ),
+    [cartProducts, getCartItemSubtotal],
+  );
 
+  // Data fetching effect
   useEffect(() => {
+    let isMounted = true;
+
     const fetchCartProducts = async () => {
       try {
         setIsLoading(true);
-        const products = await getCartProducts({ ids: [...cartIds] });
-        products?.length > 0 ? setCartProducts(products) : setCartProducts([]);
+
+        if (cartItemIds.length > 0) {
+          const products = await getCartProducts({ ids: cartItemIds });
+          if (isMounted) setCartProducts(products || []);
+        } else {
+          setCartProducts([]);
+        }
       } catch (error) {
-        console.log(error);
+        console.error("Error fetching cart products:", error);
       } finally {
-        setIsLoading(false);
+        if (isMounted) setIsLoading(false);
       }
     };
+
     fetchCartProducts();
-  }, [cart]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [cartItemIds, setCartProducts, setIsLoading]);
 
   return {
     isLoading,
-    cart,
-    cartIds,
+    cartItems,
     cartProducts,
     subtotal,
-    removeItemFromCart,
+    setIsLoading,
     clearCart,
-    addItemToCart,
-    getItemQuantityFromCart,
-    getItemSubtotalFromCart,
+    addCartItem,
+    removeCartItem,
+    setCartProducts,
+    getCartItemQuantity,
+    getCartItemSubtotal,
   };
 };
 

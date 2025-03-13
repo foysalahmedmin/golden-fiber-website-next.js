@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/Button";
 import useCart from "@/hooks/state/useCart";
 import { cn } from "@/lib/utils";
 import { forwardRef } from "react";
+import { toast } from "react-toastify";
 
 const AddToCardButton = forwardRef(
   (
@@ -19,10 +20,11 @@ const AddToCardButton = forwardRef(
     },
     ref,
   ) => {
-    const { addItemToCart } = useCart();
+    const { addCartItem } = useCart();
     const handleAddToCart = (e) => {
       e.stopPropagation();
-      addItemToCart({ id: stockId, quantity: quantity });
+      addCartItem({ id: stockId, quantity: quantity });
+      toast.success("Added to cart");
     };
 
     return (

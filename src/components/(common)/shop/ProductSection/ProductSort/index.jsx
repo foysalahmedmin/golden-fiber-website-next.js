@@ -36,8 +36,9 @@ const ProductSort = () => {
             {sorts?.map((item, i) => (
               <li key={i}>
                 <QueryLink
-                  params={{ sort: item?.value }}
-                  className="block px-2 py-1"
+                  query={{ sort: item?.value }}
+                  className="block px-2 py-1 shadow-inner hover:bg-muted/25"
+                  activeClassName="bg-muted/25 shadow-inner"
                 >
                   {item?.label}
                 </QueryLink>

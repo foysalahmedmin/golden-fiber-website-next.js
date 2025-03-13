@@ -8,7 +8,6 @@ import Cart from "./Cart";
 import NavMenu from "./NavMenu";
 import SearchBar from "./SearchBar";
 import ThemeToggler from "./ThemeToggler";
-import UserAndAuthNav from "./UserAndAuthNav";
 
 const Navigation = ({ access, user }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +28,7 @@ const Navigation = ({ access, user }) => {
                 <ThemeToggler />
               </div>
               <Cart access={access} user={user} />
-              <UserAndAuthNav access={access} user={user} />
+              {/* <UserAndAuthNav access={access} user={user} /> */}
             </div>
             <div className="lg:hidden">
               <Button

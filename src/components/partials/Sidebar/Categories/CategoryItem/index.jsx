@@ -13,8 +13,9 @@ const CategoryItem = async ({ item }) => {
     <div className="group/category-item">
       <QueryLink
         href="shop"
-        params={{ category: _id }}
+        query={{ category: _id }}
         className="flex cursor-pointer items-center justify-between gap-2 px-4 py-1 hover:bg-muted/25 hover:shadow-inner"
+        activeClassName="bg-muted/25 shadow-inner"
       >
         <span>{name}</span>
         {subCategories?.length > 0 && <ChevronRight size={16} />}

@@ -15,10 +15,10 @@ import Image from "next/image";
 
 const CartItem = ({ className, item, index }) => {
   const {
-    addItemToCart,
-    removeItemFromCart,
-    getItemQuantityFromCart,
-    getItemSubtotalFromCart,
+    addCartItem,
+    removeCartItem,
+    getCartItemQuantity,
+    getCartItemSubtotal,
   } = useCart();
   const { _id, name, short_description, stocks, thumbnail } = item;
 
@@ -32,11 +32,11 @@ const CartItem = ({ className, item, index }) => {
   const image = urls?.product_thumbnail + "/" + thumbnail;
 
   const handleRemove = () => {
-    removeItemFromCart({ id: stockId });
+    removeCartItem({ id: stockId });
   };
 
   const handleSetQuantity = (quantity) => {
-    addItemToCart({ id: stockId, quantity });
+    addCartItem({ id: stockId, quantity });
   };
   return (
     <tr className={cn("border-b", className)}>
@@ -83,7 +83,7 @@ const CartItem = ({ className, item, index }) => {
       </td>
       <td className="whitespace-nowrap px-[1em] py-[0.5em] text-center text-[1em]">
         <QuantitySelector
-          quantity={getItemQuantityFromCart({ id: stockId }) || 0}
+          quantity={getCartItemQuantity({ id: stockId }) || 0}
           setQuantity={handleSetQuantity}
           maxValue={availableQuantity}
           minValue={0}
@@ -95,7 +95,7 @@ const CartItem = ({ className, item, index }) => {
         </QuantitySelector>
       </td>
       <td className="whitespace-nowrap py-[0.5em] text-center text-[1em] font-semibold">
-        {getItemSubtotalFromCart({
+        {getCartItemSubtotal({
           id: stockId,
           price: selling_price,
         })?.toFixed(2)}{" "}

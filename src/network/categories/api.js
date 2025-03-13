@@ -6,9 +6,9 @@ export const getAllCategories = async ({ page, limit, search } = {}) => {
   // Build query parameters conditionally
   const params = new URLSearchParams();
 
-  if (page) params.append("page", page);
-  if (limit) params.append("limit", limit);
-  if (search) params.append("search", search);
+  if (page) params.set("page", page);
+  if (limit) params.set("limit", limit);
+  if (search) params.set("search", search);
 
   const urlWithQuery = `${endpoint}?${params?.toString()}`;
   try {
@@ -41,10 +41,10 @@ export const getAllSubCategories = async ({
   // Build query parameters conditionally
   const params = new URLSearchParams();
 
-  if (page) params.append("page", page);
-  if (limit) params.append("limit", limit);
-  if (search) params.append("search", search);
-  if (category) params.append("category", category);
+  if (page) params.set("page", page);
+  if (limit) params.set("limit", limit);
+  if (search) params.set("search", search);
+  if (category) params.set("category", category);
 
   const urlWithQuery = `${endpoint}?${params?.toString()}`;
   try {

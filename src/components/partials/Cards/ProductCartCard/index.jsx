@@ -15,10 +15,10 @@ import Image from "next/image";
 
 const ProductCartCard = ({ className, item }) => {
   const {
-    addItemToCart,
-    removeItemFromCart,
-    getItemQuantityFromCart,
-    getItemSubtotalFromCart,
+    addCartItem,
+    removeCartItem,
+    getCartItemQuantity,
+    getCartItemSubtotal,
   } = useCart();
   const { name, thumbnail, stock } = item;
   const {
@@ -31,11 +31,11 @@ const ProductCartCard = ({ className, item }) => {
   const image = urls?.product_thumbnail + "/" + thumbnail;
 
   const handleRemove = () => {
-    removeItemFromCart({ id: stockId });
+    removeCartItem({ id: stockId });
   };
 
   const handleSetQuantity = (quantity) => {
-    addItemToCart({ id: stockId, quantity });
+    addCartItem({ id: stockId, quantity });
   };
 
   return (
@@ -85,7 +85,7 @@ const ProductCartCard = ({ className, item }) => {
               </div>
               <div className="text-[0.75em]">
                 <QuantitySelector
-                  quantity={getItemQuantityFromCart({ id: stockId }) || 0}
+                  quantity={getCartItemQuantity({ id: stockId }) || 0}
                   setQuantity={handleSetQuantity}
                   maxValue={availableQuantity}
                   minValue={0}
@@ -115,7 +115,7 @@ const ProductCartCard = ({ className, item }) => {
           </div>
           <div>
             <span className="block font-bold">
-              {getItemSubtotalFromCart({
+              {getCartItemSubtotal({
                 id: stockId,
                 price: selling_price,
               })?.toFixed(2)}{" "}

@@ -1,6 +1,6 @@
 "use client";
 
-import { addCookie } from "@/app/actions";
+import { setAuthCookies } from "@/app/actions";
 import { Button } from "@/components/ui/Button";
 import { Toggler } from "@/components/ui/Toggler";
 import { signInUser } from "@/network/auth/api";
@@ -23,7 +23,7 @@ const SignInSection = () => {
       if (status?.error?.status >= 400) {
         setError(status?.error?.message);
       } else {
-        await addCookie(status);
+        await setAuthCookies(status);
         setEmail("");
         setPassword("");
         setError("");
