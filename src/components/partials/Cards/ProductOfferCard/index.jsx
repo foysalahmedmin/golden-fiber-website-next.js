@@ -123,8 +123,8 @@ const StocksColorTabTriggers = ({ stocks, className }) => {
           <TabsTrigger
             key={i}
             value={stock?._id}
-            className="flex size-[1.5rem] overflow-hidden rounded-full border-0 after:hidden"
-            activeClassName="ring-[0.15rem] ring-muted-foreground/50 ring-offset-[0.15rem]"
+            className="flex size-[1.25rem] overflow-hidden rounded-full border-0 after:hidden"
+            activeClassName="ring-[0.1rem] ring-muted-foreground/50 ring-offset-[0.1rem]"
           >
             <Button
               style={{ background: stock?.color?.code }}
@@ -150,13 +150,15 @@ const ProductOfferCardTab = ({
   const {
     _id: productId,
     name,
-    thumbnail,
     short_description,
+    media,
     rating,
     totalReviews,
     stocks,
     tags,
+    number_of_sales,
   } = product;
+  const { thumbnail, gallery } = media || {};
   const {
     _id: stockId,
     selling_price,
@@ -257,7 +259,7 @@ const ProductOfferCardTab = ({
   );
 };
 
-const ProductOfferCard = ({ item, className }) => {
+const ProductOfferCard = ({ item, className, variant = "grid" }) => {
   const { stocks } = item;
 
   return (

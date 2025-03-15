@@ -20,7 +20,8 @@ const ProductCartCard = ({ className, item }) => {
     getCartItemQuantity,
     getCartItemSubtotal,
   } = useCart();
-  const { name, thumbnail, stock } = item;
+  const { name, media, stock } = item || {};
+  const { thumbnail, gallery } = media || {};
   const {
     _id: stockId,
     quantity: availableQuantity,

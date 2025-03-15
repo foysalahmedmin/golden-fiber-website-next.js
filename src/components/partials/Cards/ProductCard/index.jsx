@@ -144,13 +144,16 @@ const ProductCardTab = ({ product, stock, className, variant = "grid" }) => {
   const {
     _id: productId,
     name,
-    thumbnail,
     short_description,
+    media,
     rating,
     totalReviews,
     stocks,
     tags,
-  } = product;
+  } = product || {};
+
+  const { thumbnail, gallery } = media || {};
+
   const {
     _id: stockId,
     selling_price,
@@ -355,8 +358,8 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
   const { stocks } = item;
 
   return (
-    <Tabs value={stocks?.[0]?._id || ""}>
-      <TabsContent>
+    <Tabs className="flex h-full flex-col" value={stocks?.[0]?._id || ""}>
+      <TabsContent className="h-full flex-1">
         {stocks?.map((stock, index) => (
           <ProductCardTab
             key={index}

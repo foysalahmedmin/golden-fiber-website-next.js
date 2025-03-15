@@ -10,12 +10,12 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 const ProductThumbnail = ({ className, product }) => {
-  const { name, thumbnail, gallery } = product?.media || {};
+  const { name, media } = product || {};
+  const { thumbnail, gallery } = media || {};
 
   const image = urls?.product_thumbnail + "/" + thumbnail;
-  const othersImages = gallery?.map(
-    (item) => urls.product_gallery + "/" + item,
-  );
+  const othersImages =
+    gallery?.map((item) => urls.product_gallery + "/" + item) || [];
 
   const isImages = othersImages?.length > 0;
   const images = [image, ...(isImages ? othersImages : [])];
