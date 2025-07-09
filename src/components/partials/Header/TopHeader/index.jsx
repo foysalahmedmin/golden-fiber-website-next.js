@@ -1,6 +1,6 @@
 const TopHeader = () => {
   return (
-    <div className="h-10 bg-dark text-light">
+    <div className="hidden h-10 bg-dark text-light lg:block">
       <div className="container flex h-full items-center justify-between">
         <div>
           <p className="hidden lg:block">Welcome to Golden Fiber Asia</p>
