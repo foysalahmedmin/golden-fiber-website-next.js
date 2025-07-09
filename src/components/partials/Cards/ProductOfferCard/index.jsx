@@ -175,8 +175,8 @@ const ProductOfferCardTab = ({
   // const endDate = "2025-02-01";
 
   return (
-    <TabsItem value={stockId}>
-      <div className={cn("group/card h-full text-[1rem]", className)}>
+    <TabsItem className="size-full" value={stockId}>
+      <div className={cn("group/card size-full text-[1rem]", className)}>
         <div className="flex size-full flex-col">
           <div className="relative w-full overflow-hidden rounded-md">
             <Link
@@ -203,14 +203,14 @@ const ProductOfferCardTab = ({
             )}
           </div>
           <div className="relative -mt-[3em] flex grow flex-col px-[0.5em]">
-            <div className="flex grow flex-col space-y-[0.5em] rounded-md border bg-card px-[1em] py-[1em] shadow">
+            <div className="flex grow flex-col gap-y-[1em] rounded-md border bg-card px-[1em] py-[1em] shadow">
               <Link
                 href={productId ? `/shop/${productId}` : "#"}
-                className="grid grow gap-[0.5em]"
+                className="space-y-[1em]"
               >
                 <h3 className="text-[1em] leading-none text-title">{name}</h3>
                 {short_description && (
-                  <p className="text-[0.75em] leading-none text-foreground/75">
+                  <p className="line-clamp-3 text-[0.75em] leading-none text-foreground/75">
                     {short_description}
                   </p>
                 )}
@@ -231,15 +231,17 @@ const ProductOfferCardTab = ({
                   className="flex-col items-start"
                 />
               )}
-              <div className="flex items-center justify-between gap-[0.5em]">
-                <StocksColorTabTriggers stocks={stocks} />
+              <div className="flex items-start justify-between gap-[0.5em]">
+                <div className="py-[0.165em]">
+                  <StocksColorTabTriggers stocks={stocks} />
+                </div>
                 <Price
                   price={selling_price}
                   originalPrice={original_price}
                   className="-right-[1em] ml-auto rounded-e-none"
                 />
               </div>
-              <div className="!mt-[1em]">
+              <div className="!mt-auto">
                 <AddToCardButton
                   className="primary w-full rounded-md rounded-t-none text-[0.875em] uppercase hover:bg-primary/75 group-hover/card:bg-primary group-hover/card:text-primary-foreground"
                   variant="outline"
@@ -263,8 +265,8 @@ const ProductOfferCard = ({ item, className, variant = "grid" }) => {
   const { stocks } = item;
 
   return (
-    <Tabs value={stocks?.[0]?._id || ""}>
-      <TabsContent>
+    <Tabs className="flex size-full flex-col" value={stocks?.[0]?._id || ""}>
+      <TabsContent className="size-full flex-1">
         {stocks?.map((stock, index) => (
           <ProductOfferCardTab
             key={index}

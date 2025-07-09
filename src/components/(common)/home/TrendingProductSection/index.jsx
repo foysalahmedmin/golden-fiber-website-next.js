@@ -16,14 +16,14 @@ const TrendingProductSection = async () => {
                   <Subtitle>New Products</Subtitle>
                   <Title>Trending Products</Title>
                 </SectionTitle>
-                <TabsList className="relative mb-0 inline-flex gap-0 overflow-visible">
+                <TabsList className="relative mb-0 inline-flex w-full gap-0 overflow-auto">
                   {categories?.map((item, i) => (
                     <TabsTrigger
                       activeClassName="shadow-inner"
                       key={i}
                       value={item?._id}
                     >
-                      <span className="inline-block px-2 text-sm font-semibold capitalize md:text-base">
+                      <span className="inline-block whitespace-nowrap px-2 text-sm font-semibold capitalize md:text-base">
                         {item?.name}
                       </span>
                     </TabsTrigger>

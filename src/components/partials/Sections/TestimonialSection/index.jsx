@@ -29,7 +29,7 @@ const TestimonialSection = () => {
                 {testimonials?.slice(0, 12).map((item, index) => (
                   <CarouselItem
                     key={index}
-                    className="group/slide -px-4 relative basis-1/2 self-stretch py-0"
+                    className="group/slide -px-4 relative self-stretch py-0 lg:basis-1/2"
                   >
                     <TestimonialCard item={item} />
                   </CarouselItem>

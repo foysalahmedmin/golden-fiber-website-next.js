@@ -17,11 +17,11 @@ export const metadata = {
 const HomePage = () => {
   return (
     <main>
-      <div className="container relative flex md:gap-x-6 xl:gap-x-8">
+      <div className="container relative flex overflow-hidden md:gap-x-6 xl:gap-x-8">
         <aside className="hidden self-stretch py-4 md:w-60 md:py-6 lg:block xl:w-80 xl:py-8">
           <Categories className="h-full" />
         </aside>
-        <div className="flex-1 self-stretch py-4 md:py-6 xl:py-8">
+        <div className="w-full flex-1 self-stretch py-4 md:py-6 lg:w-auto xl:py-8">
           <BannerSection />
         </div>
       </div>

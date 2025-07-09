@@ -192,7 +192,7 @@ const ProductCardTab = ({ product, stock, className, variant = "grid" }) => {
               >
                 <h3 className="text-[1em] leading-none text-title">{name}</h3>
                 {short_description && (
-                  <p className="text-[0.75em] leading-none text-foreground/75">
+                  <p className="line-clamp-3 text-[0.75em] leading-none text-foreground/75">
                     {short_description}
                   </p>
                 )}
@@ -253,7 +253,7 @@ const ProductCardTab = ({ product, stock, className, variant = "grid" }) => {
               >
                 <h3 className="text-[1em] leading-none text-title">{name}</h3>
                 {short_description && (
-                  <p className="text-[0.75em] leading-none text-foreground/75">
+                  <p className="line-clamp-3 text-[0.75em] leading-none text-foreground/75">
                     {short_description}
                   </p>
                 )}
@@ -318,7 +318,7 @@ const ProductCardTab = ({ product, stock, className, variant = "grid" }) => {
               >
                 <h3 className="text-[1em] leading-none text-title">{name}</h3>
                 {short_description && (
-                  <p className="text-[0.75em] leading-none text-foreground/75">
+                  <p className="line-clamp-3 text-[0.75em] leading-none text-foreground/75">
                     {short_description}
                   </p>
                 )}

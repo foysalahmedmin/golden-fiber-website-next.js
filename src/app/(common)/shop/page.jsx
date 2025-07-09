@@ -5,7 +5,7 @@ import SubscriptionBanner from "@/components/partials/Sections/SubscriptionBanne
 const ShopePage = ({ searchParams }) => {
   return (
     <main>
-      <div className="container">
+      <div className="container mt-6">
         <SubscriptionBanner />
       </div>
       <div className="container">

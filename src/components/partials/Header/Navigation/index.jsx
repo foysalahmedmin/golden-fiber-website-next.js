@@ -12,7 +12,7 @@ import ThemeToggler from "./ThemeToggler";
 const Navigation = ({ access, user }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <nav className="sticky top-0 z-[100000] h-header w-full border-y bg-card">
+    <nav className="sticky top-0 z-40 h-header w-full border-y bg-card">
       <div className="container h-full">
         <div className="flex h-full items-center justify-between gap-2 lg:gap-4">
           <div>

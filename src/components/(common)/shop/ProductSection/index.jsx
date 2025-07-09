@@ -39,7 +39,7 @@ const ProductSection = async ({ searchParams }) => {
           <DrawerBackdrop />
           <DrawerContent
             size="sm"
-            className="border-none bg-transparent md:w-80"
+            className="border-none bg-card md:w-80 lg:bg-transparent"
           >
             <aside className="self-stretch py-4 md:space-y-6 md:py-6 xl:py-8">
               <Sidebar className="space-y-4" />

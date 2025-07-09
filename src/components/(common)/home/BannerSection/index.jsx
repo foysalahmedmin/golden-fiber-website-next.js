@@ -43,7 +43,7 @@ const BannerSection = () => {
     },
   ];
   return (
-    <section className="h-full">
+    <section className="h-full w-full">
       <div className="dark size-full">
         <section className="size-full rounded-md border bg-dark text-dark-foreground">
           <Carousel
