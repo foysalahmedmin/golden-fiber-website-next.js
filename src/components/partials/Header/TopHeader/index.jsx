@@ -3,7 +3,7 @@ const TopHeader = () => {
     <div className="h-10 bg-dark text-light">
       <div className="container flex h-full items-center justify-between">
         <div>
-          <p className="hidden lg:block">Welcome to golden-fiver</p>
+          <p className="hidden lg:block">Welcome to Golden Fiber Asia</p>
         </div>
         {/* <div className="flex items-center divide-x">
           <Link

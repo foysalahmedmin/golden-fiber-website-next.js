@@ -1,4 +1,4 @@
-import { instagram } from "@/assets/data/instagram";
+import { testimonials } from "@/assets/data/testimonials";
 import TestimonialCard from "@/components/partials/Cards/TestimonialCard";
 import {
   Carousel,
@@ -26,7 +26,7 @@ const TestimonialSection = () => {
               autoplay
             >
               <CarouselContent>
-                {instagram?.slice(0, 12).map((item, index) => (
+                {testimonials?.slice(0, 12).map((item, index) => (
                   <CarouselItem
                     key={index}
                     className="group/slide -px-4 relative basis-1/2 self-stretch py-0"

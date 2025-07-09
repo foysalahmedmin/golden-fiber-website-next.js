@@ -10,22 +10,23 @@ const StorySection = () => {
               Our Story
             </h1>
             <p className="mb-4">
-              Launced in 2015, Exclusive is South Asia’s premier online shopping
-              makterplace with an active presense in Bangladesh. Supported by
-              wide range of tailored marketing, data and service solutions,
-              Exclusive has 10,500 sallers and 300 brands and serves 3 millioons
-              customers across the region.
+              Golden Fiber Asia began with a vision to bring sustainable living
+              into everyday life through beautifully crafted jute products.
+              Rooted in local craftsmanship and natural materials, we aim to
+              blend tradition with modern lifestyle needs.
             </p>
             <p>
-              Exclusive has more than 1 Million products to offer, growing at a
-              very fast. Exclusive offers a diverse assotment in categories
-              ranging from consumer.
+              From home essentials to fashion accessories, every product we
+              offer is made with care, using eco-friendly processes that respect
+              both nature and people. We believe in supporting local artisans,
+              promoting biodegradable alternatives, and offering products that
+              are both functional and meaningful.
             </p>
           </div>
           <div className="flex justify-center md:justify-end">
             <Image
-              src="/images/about/story.png"
-              alt="story"
+              src="/images/about/story.jpg"
+              alt="Our story - jute products"
               width={500}
               height={500}
             />

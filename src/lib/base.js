@@ -1,5 +1,5 @@
-let current = "https://admin.goldenfiberasia.com";
-// const current = "http://localhost:5027";
+// let current = "https://admin.goldenfiberasia.com";
+const current = "http://localhost:5027";
 
 export const urls = {
   url: `${current}`,

@@ -1,4 +1,4 @@
 export const project = {
-    name: "golden-fiver",
-    description: "A description of the project",
+  name: "Golden Fiber Asia",
+  description: "A description of the project",
 };

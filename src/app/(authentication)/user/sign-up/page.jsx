@@ -12,7 +12,7 @@ export const metadata = {
 
 const SignUpPage = async () => {
   const cookiesData = await cookies();
-  const session = cookiesData.get("golden-fiver");
+  const session = cookiesData.get("golden-fiber");
   if (session?.value) {
     redirect(`/user/profile`);
   }

@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "golden-fiver",
+  title: "Golden Fiber Asia",
   description: "A description of the project",
 };
 

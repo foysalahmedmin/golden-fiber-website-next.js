@@ -14,12 +14,15 @@ const Logo = ({ className, asChild, href = "/", ...props }) => {
       {...props}
     >
       <Image
-        src="/images/partials/logo.svg"
-        width={32}
-        height={32}
+        src="/images/partials/logo.png"
+        width={50}
+        height={50}
         alt="logo"
       />
-      <span className="text-base text-title">Commerce</span>
+      <span className="text-base text-title">
+        <span className="text-yellow-500">Golden</span>{" "}
+        <span className="text-primary">Fiber Asia</span>
+      </span>
     </Comp>
   );
 };

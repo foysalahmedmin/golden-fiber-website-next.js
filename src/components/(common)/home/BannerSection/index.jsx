@@ -12,14 +12,13 @@ import BannerSlide from "./BannerSlide";
 const BannerSection = () => {
   const data = [
     {
-      title: "Man Fashion",
-      subTitle: "Welcome to golden-fiver",
-      description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Phasellus euismod, nunc id lobortis facilisis, nunc augue
-      condimentum nunc, eu scelerisque nunc nibh id nunc.`,
+      title: "Fashionable Jute Bags",
+      subTitle: "Welcome to Golden Fiber Asia",
+      description: `Explore our handcrafted jute bags that blend style with sustainability. 
+    Perfect for daily use, shopping, or gifting — made from 100% eco-friendly golden fiber asia.`,
       image: {
         src: "/images/home/home-banner-1.png",
-        alt: "home-slider-image-4",
+        alt: "home-slider-image-1",
       },
       button: {
         label: "Shop Now",
@@ -28,14 +27,13 @@ const BannerSection = () => {
       },
     },
     {
-      title: "Woman Fashion",
-      subTitle: "Welcome to golden-fiver",
-      description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Phasellus euismod, nunc id lobortis facilisis, nunc augue
-      condimentum nunc, eu scelerisque nunc nibh id nunc.`,
+      title: "Elegant Jute Storage Boxes",
+      subTitle: "Welcome to Golden Fiber Asia",
+      description: `Organize your space naturally with our stylish jute boxes. 
+    Durable, biodegradable, and beautifully designed for conscious living.`,
       image: {
         src: "/images/home/home-banner-2.png",
-        alt: "home-slider-image-1",
+        alt: "home-slider-image-2",
       },
       button: {
         label: "Shop Now",

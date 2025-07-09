@@ -6,10 +6,9 @@ import Link from "next/link";
 const ParallaxBannerSection = () => {
   const { title, subTitle, description, image, button } = {
     title: "Man Fashion",
-    subTitle: "Welcome to golden-fiver",
-    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Phasellus euismod, nunc id lobortis facilisis, nunc augue
-    condimentum nunc, eu scelerisque nunc nibh id nunc.`,
+    subTitle: "Welcome to Golden Fiber Asia",
+    description: `Discover timeless style with our handcrafted jute fashion for men. 
+  From everyday essentials to bold accessories, our eco-conscious collection is designed to make a lasting impression — naturally.`,
     image: {
       src: "/images/home/home-parallax-banner.svg",
       alt: "home-slider-image-4",
