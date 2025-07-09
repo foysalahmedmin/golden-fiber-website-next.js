@@ -1,10 +1,10 @@
 "use client";
 
 import { Heart, HeartOutline } from "@/assets/images/icons/Heart";
-import { Magnify } from "@/assets/images/icons/Magnify";
 import { Share } from "@/assets/images/icons/Share";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
+import { Eye } from "lucide-react";
 import { useState } from "react";
 
 const CartInfo = ({ className }) => {
@@ -41,7 +41,7 @@ const CartInfo = ({ className }) => {
           title="Quick View"
           shape="icon"
         >
-          <Magnify className="size-[1.5em]" />
+          <Eye className="size-[1.5em]" />
         </Button>
       </div>
       <div className="translate-y-[1em] opacity-0 transition-all delay-200 duration-300 group-hover/card:translate-y-0 group-hover/card:opacity-100">

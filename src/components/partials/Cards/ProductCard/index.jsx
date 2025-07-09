@@ -71,18 +71,18 @@ const Price = ({ price, originalPrice, className }) => {
     >
       {originalPrice && (
         <del className="text-[0.75em] leading-none text-muted-foreground">
-          $
           {toFixedAndLocaleStringCurrency({
             value: originalPrice,
-          })}
+          })}{" "}
+          <span className="font-normal">BDT</span>
         </del>
       )}
       {price && (
         <strong className="text-[1em] font-semibold leading-none text-title">
-          $
           {toFixedAndLocaleStringCurrency({
             value: price,
-          })}
+          })}{" "}
+          <span className="font-normal">BDT</span>
         </strong>
       )}
     </div>
@@ -164,11 +164,11 @@ const ProductCardTab = ({ product, stock, className, variant = "grid" }) => {
   const image = urls?.product_thumbnail + "/" + thumbnail;
 
   return (
-    <TabsItem value={stockId}>
+    <TabsItem className="size-full" value={stockId}>
       {variant === "grid" && (
         <div
           className={cn(
-            "group/card h-full self-stretch overflow-hidden rounded-md border text-[1rem] shadow",
+            "group/card size-full self-stretch overflow-hidden rounded-md border text-[1rem] shadow",
             className,
           )}
         >
@@ -185,10 +185,10 @@ const ProductCardTab = ({ product, stock, className, variant = "grid" }) => {
                 <CartInfo />
               </div>
             </div>
-            <div className="flex grow flex-col space-y-[0.5em] bg-card px-[1em] py-[1em]">
+            <div className="flex grow flex-col gap-y-[1em] bg-card px-[1em] py-[1em]">
               <Link
                 href={productId ? `/shop/${productId}` : "#"}
-                className="grid grow gap-[0.5em]"
+                className="grow space-y-[1em]"
               >
                 <h3 className="text-[1em] leading-none text-title">{name}</h3>
                 {short_description && (
@@ -200,15 +200,17 @@ const ProductCardTab = ({ product, stock, className, variant = "grid" }) => {
               {rating && (
                 <RatingReviews rating={rating} totalReviews={totalReviews} />
               )}
-              <div className="flex items-center justify-between gap-[0.5em]">
-                <StocksColorTabTriggers stocks={stocks} />
+              <div className="flex items-end justify-between gap-[0.5em]">
+                <div className="py-[0.165em]">
+                  <StocksColorTabTriggers stocks={stocks} />
+                </div>
                 <Price
                   price={selling_price}
                   originalPrice={original_price}
                   className="-right-[1em] ml-auto rounded-e-none"
                 />
               </div>
-              <div className="!mt-[1em]">
+              <div className="!mt-auto">
                 <AddToCardButton
                   className="primary w-full rounded-md rounded-t-none text-[0.875em] uppercase hover:bg-primary/75 group-hover/card:bg-primary group-hover/card:text-primary-foreground"
                   variant="outline"
@@ -227,7 +229,7 @@ const ProductCardTab = ({ product, stock, className, variant = "grid" }) => {
       {variant === "list" && (
         <div
           className={cn(
-            "group/card h-full self-stretch overflow-hidden rounded-md border text-[1rem] shadow",
+            "group/card size-full self-stretch overflow-hidden rounded-md border text-[1rem] shadow",
             className,
           )}
         >
@@ -244,10 +246,10 @@ const ProductCardTab = ({ product, stock, className, variant = "grid" }) => {
                 <CartInfo />
               </div>
             </div>
-            <div className="flex min-w-[13.5em] flex-1 flex-shrink-0 grow flex-col space-y-[0.5em] self-stretch bg-card px-[1em] py-[1em]">
+            <div className="flex min-w-[13.5em] flex-1 flex-shrink-0 grow flex-col gap-y-[1em] self-stretch bg-card px-[1em] py-[1em]">
               <Link
                 href={productId ? `/shop/${productId}` : "#"}
-                className="grid grow gap-[0.5em]"
+                className="grow space-y-[1em]"
               >
                 <h3 className="text-[1em] leading-none text-title">{name}</h3>
                 {short_description && (
@@ -259,15 +261,17 @@ const ProductCardTab = ({ product, stock, className, variant = "grid" }) => {
               {rating && (
                 <RatingReviews rating={rating} totalReviews={totalReviews} />
               )}
-              <div className="flex items-center justify-between gap-[0.5em]">
-                <StocksColorTabTriggers stocks={stocks} />
+              <div className="flex items-end justify-between gap-[0.5em]">
+                <div className="py-[0.165em]">
+                  <StocksColorTabTriggers stocks={stocks} />
+                </div>
                 <Price
                   price={selling_price}
                   originalPrice={original_price}
                   className="-right-[1em] ml-auto rounded-e-none"
                 />
               </div>
-              <div className="!mt-[1em]">
+              <div className="!mt-auto">
                 <AddToCardButton
                   className="primary w-full rounded-md rounded-t-none text-[0.875em] uppercase hover:bg-primary/75 group-hover/card:bg-primary group-hover/card:text-primary-foreground"
                   variant="outline"
@@ -307,10 +311,10 @@ const ProductCardTab = ({ product, stock, className, variant = "grid" }) => {
                 <CartInfo />
               </div>
             </div>
-            <div className="flex w-[13.5em] flex-1 flex-shrink-0 grow flex-col space-y-[0.5em] self-stretch bg-card px-[1em] py-[1em]">
+            <div className="flex w-[13.5em] flex-1 flex-shrink-0 grow flex-col gap-y-[1em] self-stretch bg-card px-[1em] py-[1em]">
               <Link
                 href={productId ? `/shop/${productId}` : "#"}
-                className="grid grow gap-[0.5em]"
+                className="grow space-y-[1em]"
               >
                 <h3 className="text-[1em] leading-none text-title">{name}</h3>
                 {short_description && (
@@ -326,15 +330,17 @@ const ProductCardTab = ({ product, stock, className, variant = "grid" }) => {
                   className="flex-col items-start"
                 />
               )}
-              <div className="flex flex-wrap items-center justify-between gap-[0.5em]">
-                <StocksColorTabTriggers stocks={stocks} />
+              <div className="flex flex-wrap items-end justify-between gap-[0.5em]">
+                <div className="py-[0.165em]">
+                  <StocksColorTabTriggers stocks={stocks} />
+                </div>
                 <Price
                   price={selling_price}
                   originalPrice={original_price}
                   className="ml-auto"
                 />
               </div>
-              <div className="!mt-[1em]">
+              <div className="!mt-auto">
                 <AddToCardButton
                   className="primary h-[2.5em] w-full rounded-md rounded-t-none text-[0.875em] uppercase hover:bg-primary/75 group-hover/card:bg-primary group-hover/card:text-primary-foreground"
                   variant="outline"
@@ -358,8 +364,8 @@ const ProductCard = ({ item, className, variant = "grid" }) => {
   const { stocks } = item;
 
   return (
-    <Tabs className="flex h-full flex-col" value={stocks?.[0]?._id || ""}>
-      <TabsContent className="h-full flex-1">
+    <Tabs className="flex size-full flex-col" value={stocks?.[0]?._id || ""}>
+      <TabsContent className="size-full flex-1">
         {stocks?.map((stock, index) => (
           <ProductCardTab
             key={index}
