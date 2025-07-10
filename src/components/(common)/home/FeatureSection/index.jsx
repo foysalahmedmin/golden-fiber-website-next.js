@@ -23,12 +23,12 @@ const FeatureSection = () => {
             />
             <div className="absolute bottom-0 left-0 right-0">
               <div className="w-full max-w-60 p-4 xl:p-6 2xl:p-8">
-                <div className=" md:mb-2">
-                  <h4 className=" text-base text-neutral-50 md:mb-2 md:text-xl">
-                    PlayStation 5
+                <div className="md:mb-2">
+                  <h4 className="text-base text-neutral-50 md:mb-2 md:text-xl">
+                    Decor Jute Bag
                   </h4>
                   <p className="text-xs font-light text-neutral-300">
-                    Black and White version of the PS5 coming out on sale.
+                    A simple and comfortable bag made of jute.
                   </p>
                 </div>
                 <div>
@@ -54,12 +54,12 @@ const FeatureSection = () => {
             />
             <div className="absolute bottom-0 left-0 right-0">
               <div className="w-full max-w-60 p-4 xl:p-6 2xl:p-8">
-                <div className=" md:mb-2">
-                  <h4 className=" text-base text-neutral-50 md:mb-2 md:text-xl">
-                    Women’s Collections
+                <div className="md:mb-2">
+                  <h4 className="text-base text-neutral-50 md:mb-2 md:text-xl">
+                    Jute Simple Bag
                   </h4>
                   <p className="text-xs font-light text-neutral-300">
-                    Featured woman collections that give you another vibe.
+                    A simple and comfortable bag made of jute.
                   </p>
                 </div>
                 <div>
@@ -85,12 +85,12 @@ const FeatureSection = () => {
             />
             <div className="absolute bottom-0 left-0 right-0">
               <div className="w-full max-w-60 p-4 xl:p-6 2xl:p-8">
-                <div className=" md:mb-2">
-                  <h4 className=" text-base text-neutral-50 md:mb-2 md:text-xl">
-                    Speakers
+                <div className="md:mb-2">
+                  <h4 className="text-base text-neutral-50 md:mb-2 md:text-xl">
+                    Hanging Jute Basket
                   </h4>
                   <p className="text-xs font-light text-neutral-300">
-                    Amazon wireless speakers
+                    A beautiful hanging basket made of jute.
                   </p>
                 </div>
                 <div>
@@ -116,12 +116,12 @@ const FeatureSection = () => {
             />
             <div className="absolute bottom-0 left-0 right-0">
               <div className="w-full max-w-60 p-4 xl:p-6 2xl:p-8">
-                <div className=" md:mb-2">
-                  <h4 className=" text-base text-neutral-50 md:mb-2 md:text-xl">
-                    Perfume
+                <div className="md:mb-2">
+                  <h4 className="text-base text-neutral-50 md:mb-2 md:text-xl">
+                    Table Box
                   </h4>
                   <p className="text-xs font-light text-neutral-300">
-                    GUCCI INTENSE OUD EDP
+                    A beautiful table box made of jute.
                   </p>
                 </div>
                 <div>

@@ -12,7 +12,7 @@ const SpacialOfferSection = () => {
             <div className="max-w-lg space-y-6 text-center md:space-y-8 md:text-left xl:col-span-2">
               <div>
                 <h1 className="text-3xl text-neutral-50 md:text-5xl">
-                  Enhance Your Music Experience
+                  Make your environment setup eco-friendly and stylish
                 </h1>
                 <span className="mt-4 block">
                   Start Your Daily Shopping with
